@@ -57,9 +57,11 @@ class Resource(ARNComponent):
         _, provider, service_name, region, account = context
         resource_type, resource_id = self._split_resource(self.pattern)
         LOG.debug("resource_type=%s, resource_id=%s", resource_type, resource_id)
-        resources = []
+
         for resource_type in self.matches(context):
             resource_path = ".".join([provider, service_name, resource_type])
             resource_cls = find_resource_class(resource_path)
-            resources.extend(resource_cls.enumerate(arn=self._arn, region=region, account=account, resource_id=resource_id, **kwargs))
-        return resources
+            for resource in resource_cls.enumerate(
+                arn=self._arn, region=region, account=account, resource_id=resource_id, **kwargs
+            ):
+                yield resource

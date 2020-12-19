@@ -17,7 +17,7 @@ import logging
 import jmespath
 
 from skew.resources.json_dump import json_dump
-
+from skew.awsclient import get_awsclient
 from botocore.exceptions import ClientError
 
 LOG = logging.getLogger(__name__)

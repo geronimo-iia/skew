@@ -21,7 +21,7 @@ __all__ = ["all_providers", "all_services", "all_types", "find_resource_class"]
 
 # Maps resources names as they appear in ARN's to the path name
 # of the Python class representing that resource.
-ResourceTypes: Dict[str, str] = {
+_RESOURCE_TYPES: Dict[str, str] = {
     "aws.acm.certificate": "aws.acm.Certificate",
     "aws.apigateway.restapis": "aws.apigateway.RestAPI",
     "aws.autoscaling.autoScalingGroup": "aws.autoscaling.AutoScalingGroup",
@@ -93,14 +93,14 @@ ResourceTypes: Dict[str, str] = {
 
 def all_providers():
     providers = set()
-    for resource_type in ResourceTypes:
+    for resource_type in _RESOURCE_TYPES:
         providers.add(resource_type.split(".")[0])
     return list(providers)
 
 
 def all_services(provider_name: str) -> List[str]:
     services = set()
-    for resource_type in ResourceTypes:
+    for resource_type in _RESOURCE_TYPES:
         t = resource_type.split(".")
         if t[0] == provider_name:
             services.add(t[1])
@@ -109,7 +109,7 @@ def all_services(provider_name: str) -> List[str]:
 
 def all_types(provider_name: str, service_name: str) -> List[str]:
     types = set()
-    for resource_type in ResourceTypes:
+    for resource_type in _RESOURCE_TYPES:
         t = resource_type.split(".")
         if t[0] == provider_name and t[1] == service_name:
             types.add(t[2])
@@ -118,7 +118,7 @@ def all_types(provider_name: str, service_name: str) -> List[str]:
 
 def find_resource_class(resource_path):
     """Dynamically load a class from a string."""
-    class_path = ResourceTypes[resource_path]
+    class_path = _RESOURCE_TYPES[resource_path]
     class_data = f"skew.resources.{class_path}".split(".")
     module_path = ".".join(class_data[:-1])
     class_str = class_data[-1]

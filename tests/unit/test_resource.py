@@ -18,6 +18,7 @@ import mock
 import skew.resources
 import skew.awsclient
 from skew.resources.resource import Resource
+from skew.resources.definition import _RESOURCE_TYPES, find_resource_class
 
 
 class FooResource(Resource):
@@ -58,5 +59,9 @@ class TestResource(unittest.TestCase):
         self.assertEqual(len(all_providers), 35)
 
     def test_all_regions(self):
-        all_regions = skew.arn.region.Region('arn:aws:*:*:*:*', 'arn:aws:*:*:*:*').__getattribute__('_all_region_names')
+        all_regions = skew.arn.region.Region('arn:aws:*:*:*:*', None).__getattribute__('_all_region_names')
         self.assertEqual(len(all_regions), 22)
+
+    def test_all_resource_class(self):
+        for key in _RESOURCE_TYPES.keys():
+            self.assertIsNotNone(find_resource_class(key))

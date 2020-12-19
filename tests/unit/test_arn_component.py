@@ -14,11 +14,11 @@ import unittest
 
 import mock
 
+from skew.arn import ARN
 from skew.arn.component import ARNComponent
 
 
 class FooBarComponent(ARNComponent):
-
     def choices(self, context=None):
         if context:
             if 'sorted' in context:
@@ -29,7 +29,6 @@ class FooBarComponent(ARNComponent):
 
 
 class TestARNComponent(unittest.TestCase):
-
     def setUp(self):
         pass
 
@@ -39,11 +38,16 @@ class TestARNComponent(unittest.TestCase):
     def test_choices(self):
         foobar = FooBarComponent('*', None)
         self.assertEqual(foobar.choices(), ['foo', 'bar', 'fie', 'baz'])
-        self.assertEqual(foobar.choices(
-            context=['sorted']), ['bar', 'baz', 'fie', 'foo'])
+        self.assertEqual(foobar.choices(context=['sorted']), ['bar', 'baz', 'fie', 'foo'])
         self.assertEqual(foobar.pattern, '*')
         self.assertEqual(foobar.matches(), ['foo', 'bar', 'fie', 'baz'])
         foobar.pattern = 'f.*'
         self.assertEqual(foobar.pattern, 'f.*')
         self.assertEqual(foobar.matches(), ['foo', 'fie'])
         self.assertEqual(foobar.complete('b'), ['bar', 'baz'])
+
+    def test_repr(self):
+        self.assertEqual(
+            "arn:aws:ec2:us-west-2:123456789012:natgateway/*",
+            str(ARN(arn_string="arn:aws:ec2:us-west-2:123456789012:natgateway/*")),
+        )

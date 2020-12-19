@@ -35,11 +35,30 @@ class ARN(object):
 
     def __init__(self, arn_string="arn:aws:*:*:*:*", **kwargs):
         self.query: Optional[str] = None
-        self._components: List[ARNComponent] = self._build_components_from_string(arn_string)
+        (
+            self._scheme,
+            self._provider,
+            self._service,
+            self._region,
+            self._account,
+            self._resource,
+        ) = self._build_components_from_string(arn_string)
         self.kwargs = kwargs
 
     def __repr__(self):
-        return ":".join([str(c) for c in self._components])
+        return ":".join(
+            [
+                str(c)
+                for c in [
+                    self._scheme,
+                    self._provider,
+                    self._service,
+                    self._region,
+                    self._account,
+                    self._resource,
+                ]
+            ]
+        )
 
     def debug(self):
         """Set debug mode on."""
@@ -74,27 +93,27 @@ class ARN(object):
 
     @property
     def scheme(self) -> Scheme:
-        return self._components[0]
+        return self._scheme
 
     @property
     def provider(self) -> Provider:
-        return self._components[1]
+        return self._provider
 
     @property
     def service(self) -> Service:
-        return self._components[2]
+        return self._service
 
     @property
     def region(self) -> Region:
-        return self._components[3]
+        return self._region
 
     @property
     def account(self) -> Account:
-        return self._components[4]
+        return self._account
 
     @property
     def resource(self) -> Resource:
-        return self._components[5]
+        return self._resource
 
     def __iter__(self):
         context = []
