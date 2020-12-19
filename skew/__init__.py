@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 import os
-
+from pkg_resources import get_distribution, DistributionNotFound
 from skew.arn import ARN
 from skew.boto import get_all_activated_regions, get_caller_identity_account_id
 
@@ -23,7 +23,11 @@ __all__ = [
     "scan",
 ]
 
-__version__ = open(os.path.join(os.path.dirname(__file__), "_version")).read()
+
+try:
+    __version__ = get_distribution('skew').version
+except DistributionNotFound:  # pragma: no cover
+    __version__ = '(local)'
 
 
 def scan(sku, **kwargs):
