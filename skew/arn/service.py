@@ -13,6 +13,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .arn import ARN
 
-__all__ = ["ARN"]
+from .component import ARNComponent, LOG
+from skew.resources import all_services
+__all__ = ["Region"]
+
+
+
+class Service(ARNComponent):
+    def choices(self, context=None):
+        if context:
+            provider = context[1]
+        else:
+            provider = self._arn.provider.pattern
+        return all_services(provider)
+
+    def enumerate(self, context, **kwargs):
+        LOG.debug("Service.enumerate %s", context)
+        for match in self.matches(context):
+            context.append(match)
+            for region in self._arn.region.enumerate(context, **kwargs):
+                yield region
+            context.pop()
+

@@ -42,7 +42,7 @@ class TestARN(unittest.TestCase):
     def test_ec2(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("instances_1"),
+            "placebo_data_path": self._get_response_path("instances_1"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:instance/*", **placebo_cfg)
@@ -52,7 +52,7 @@ class TestARN(unittest.TestCase):
         # Fetch a single resource
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("instances_2"),
+            "placebo_data_path": self._get_response_path("instances_2"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -73,7 +73,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_instance_not_found(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("instances_3"),
+            "placebo_data_path": self._get_response_path("instances_3"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -86,7 +86,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_volumes(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("volumes"),
+            "placebo_data_path": self._get_response_path("volumes"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:volume/*", **placebo_cfg)
@@ -103,7 +103,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_keypairs(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("keypairs"),
+            "placebo_data_path": self._get_response_path("keypairs"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -123,7 +123,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_securitygroup(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("secgrp"),
+            "placebo_data_path": self._get_response_path("secgrp"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:security-group/*", **placebo_cfg)
@@ -133,7 +133,7 @@ class TestARN(unittest.TestCase):
     def test_elb_loadbalancer(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("elbs"),
+            "placebo_data_path": self._get_response_path("elbs"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:elb:us-east-1:123456789012:loadbalancer/*", **placebo_cfg)
@@ -158,7 +158,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_vpcs(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("vpcs"),
+            "placebo_data_path": self._get_response_path("vpcs"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:vpc/*", **placebo_cfg)
@@ -168,7 +168,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_routetable(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("routetables"),
+            "placebo_data_path": self._get_response_path("routetables"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:route-table/*", **placebo_cfg)
@@ -178,7 +178,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_network_acls(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("networkacls"),
+            "placebo_data_path": self._get_response_path("networkacls"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:network-acl/*", **placebo_cfg)
@@ -188,7 +188,7 @@ class TestARN(unittest.TestCase):
     def test_s3_buckets(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("buckets"),
+            "placebo_data_path": self._get_response_path("buckets"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:s3:us-east-1:234567890123:bucket/*", **placebo_cfg)
@@ -198,7 +198,7 @@ class TestARN(unittest.TestCase):
     def test_iam_groups(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("groups"),
+            "placebo_data_path": self._get_response_path("groups"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:iam::234567890123:group/*", **placebo_cfg)
@@ -212,7 +212,7 @@ class TestARN(unittest.TestCase):
     def test_iam_users(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("users"),
+            "placebo_data_path": self._get_response_path("users"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:iam::123456789012:user/*", **placebo_cfg)
@@ -239,7 +239,7 @@ class TestARN(unittest.TestCase):
     def test_cloudformation_stacks(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("stacks"),
+            "placebo_data_path": self._get_response_path("stacks"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -254,7 +254,7 @@ class TestARN(unittest.TestCase):
     def test_nat_gateways(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("natgateways"),
+            "placebo_data_path": self._get_response_path("natgateways"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-west-2:123456789012:natgateway/*", **placebo_cfg)
@@ -269,7 +269,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_launchtemplates(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("launchtemplates"),
+            "placebo_data_path": self._get_response_path("launchtemplates"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -290,7 +290,7 @@ class TestARN(unittest.TestCase):
     def test_acm(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("certificates"),
+            "placebo_data_path": self._get_response_path("certificates"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -316,7 +316,7 @@ class TestARN(unittest.TestCase):
     def test_cloudwatch_loggroup(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("loggroups"),
+            "placebo_data_path": self._get_response_path("loggroups"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:logs:us-east-1:123456789012:log-group/*", **placebo_cfg)
@@ -355,7 +355,7 @@ class TestARN(unittest.TestCase):
     def test_vpc_flowlog(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("flowlogs"),
+            "placebo_data_path": self._get_response_path("flowlogs"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-east-1:123456789012:flow-log/*", **placebo_cfg)
@@ -370,7 +370,7 @@ class TestARN(unittest.TestCase):
     def test_cloudtrail(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("trail"),
+            "placebo_data_path": self._get_response_path("trail"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:cloudtrail:us-east-1:123456789012:trail/*", **placebo_cfg)
@@ -390,7 +390,7 @@ class TestARN(unittest.TestCase):
     def test_no_provider(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("trail"),
+            "placebo_data_path": self._get_response_path("trail"),
             "placebo_mode": "playback",
         }
         arn = scan("::cloudtrail:us-east-1:123456789012:trail/*", **placebo_cfg)
@@ -400,7 +400,7 @@ class TestARN(unittest.TestCase):
     def test_alarm(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("alarms"),
+            "placebo_data_path": self._get_response_path("alarms"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:cloudwatch:us-east-1:123456789012:alarm/*", **placebo_cfg)
@@ -417,7 +417,7 @@ class TestARN(unittest.TestCase):
     def test_customer_gateway(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("customergateways"),
+            "placebo_data_path": self._get_response_path("customergateways"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -434,7 +434,7 @@ class TestARN(unittest.TestCase):
     def test_beanstalk_environments(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("environments"),
+            "placebo_data_path": self._get_response_path("environments"),
             "placebo_mode": "playback",
         }
         arn = scan(
@@ -453,7 +453,7 @@ class TestARN(unittest.TestCase):
     def test_ec2_address(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("addresses"),
+            "placebo_data_path": self._get_response_path("addresses"),
             "placebo_mode": "playback",
         }
         arn = scan("arn:aws:ec2:us-east-1:123456789012:address/*", **placebo_cfg)
@@ -473,7 +473,7 @@ class TestARN(unittest.TestCase):
     def test_vpc_peering_connection(self):
         placebo_cfg = {
             "placebo": placebo,
-            "placebo_dir": self._get_response_path("peeringconnections"),
+            "placebo_data_path": self._get_response_path("peeringconnections"),
             "placebo_mode": "playback",
         }
         arn = scan(

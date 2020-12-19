@@ -42,15 +42,7 @@ class StateMachines(AWSResource):
         super(StateMachines, self).__init__(client, data, query)
         self._arn = self._data["stateMachineArn"]
 
-        detail = self._feed_from_spec(attr_spec=self.Meta.detail_spec)
-        if "ResponseMetadata" in detail:
-            del detail["ResponseMetadata"]
-
         self._data = {
             **self._data,
-            **detail,
+            **self._feed_from_spec(attr_spec=self.Meta.detail_spec),
         }
-
-    @property
-    def arn(self):
-        return self._arn

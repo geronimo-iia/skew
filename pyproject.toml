@@ -7,8 +7,8 @@ authors = ["Mitch Garnaat <mitch@garnaat.com>", "GUIBERT Jerome <jguibert@gmail.
 readme = "README.md"
 homepage = "https://github.com/geronimo-iia/skew"
 documentation = ""
-repository = "https://gaas.canal-plus.com/projects/DATA/repos/datalake-airflow-dags"
-keywords = ["skew", "dags"]
+repository = "https://github.com/geronimo-iia/skew"
+keywords = ["skew", "aws"]
 classifiers = [
     # update this list to match your application: https://pypi.org/pypi?%3Aaction=list_classifiers
     "Development Status :: 4 - Beta",

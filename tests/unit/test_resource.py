@@ -21,7 +21,6 @@ from skew.resources.resource import Resource
 
 
 class FooResource(Resource):
-
     class Meta(object):
         service = 'ec2'
         type = 'foo'
@@ -29,28 +28,23 @@ class FooResource(Resource):
 
 
 class TestResource(unittest.TestCase):
-
     def setUp(self):
         self.environ = {}
         self.environ_patch = mock.patch('os.environ', self.environ)
         self.environ_patch.start()
-        credential_path = os.path.join(os.path.dirname(__file__), 'cfg',
-                                       'aws_credentials')
+        credential_path = os.path.join(os.path.dirname(__file__), 'cfg', 'aws_credentials')
         self.environ['AWS_CONFIG_FILE'] = credential_path
-        config_path = os.path.join(os.path.dirname(__file__), 'cfg',
-                                   'skew.yml')
+        config_path = os.path.join(os.path.dirname(__file__), 'cfg', 'skew.yml')
         self.environ['SKEW_CONFIG'] = config_path
 
     def tearDown(self):
         pass
 
     def test_resource(self):
-        client = skew.awsclient.get_awsclient(
-            'ec2', 'us-east-1', '123456789012')
+        client = skew.awsclient.get_awsclient(service_name='ec2', region_name='us-east-1', account_id='123456789012')
         resource = FooResource(client, data={'bar': 'bar'})
         self.assertEqual(resource.id, 'bar')
-        self.assertEqual(resource.__repr__(),
-                         'arn:aws:ec2:us-east-1:123456789012:foo/bar')
+        self.assertEqual(resource.__repr__(), 'arn:aws:ec2:us-east-1:123456789012:foo/bar')
         self.assertEqual(resource.metrics, [])
         self.assertEqual(resource.find_metric('foobar'), None)
 
@@ -64,5 +58,5 @@ class TestResource(unittest.TestCase):
         self.assertEqual(len(all_providers), 35)
 
     def test_all_regions(self):
-        all_regions = skew.arn.Region('arn:aws:*:*:*:*', 'arn:aws:*:*:*:*').__getattribute__('_all_region_names')
+        all_regions = skew.arn.region.Region('arn:aws:*:*:*:*', 'arn:aws:*:*:*:*').__getattribute__('_all_region_names')
         self.assertEqual(len(all_regions), 22)

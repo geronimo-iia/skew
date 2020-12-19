@@ -1,5 +1,3 @@
-# Copyright 2014 Scopely, Inc.
-# Copyright (c) 2015 Mitch Garnaat
 # Copyright (c) 2020 Jerome Guibert
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +11,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .arn import ARN
+"""Boto3 utility."""
+from .client import AWSClient
+from .utility import (
+    get_default_region,
+    get_default_region,
+    get_all_activated_regions,
+    get_caller_identity_account_id,
+    get_default_session,
+    get_session,
+    get_client,
+)
 
-__all__ = ["ARN"]
+
+__all__ = [
+    "AWSClient",
+    "get_default_region",
+    "get_all_activated_regions",
+    "get_caller_identity_account_id",
+    "get_default_session",
+    "get_session",
+    "get_client",
+]

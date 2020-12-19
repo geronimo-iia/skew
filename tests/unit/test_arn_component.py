@@ -14,7 +14,7 @@ import unittest
 
 import mock
 
-from skew.arn import ARNComponent
+from skew.arn.component import ARNComponent
 
 
 class FooBarComponent(ARNComponent):

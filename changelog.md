@@ -7,12 +7,19 @@
   - Remove python 2, python 3.4 and 3.5 support, add 3.8, 3.9 test unit configuration
   - Update and separate dev dependencies from module dependencies
   - Align python syntax on version 3
+  - Add few typing information
 - Integrate Change from Christophe Morio (https://github.com/lbncmorio/skew/tree/more-resources)
 - Configuration:
   - Remove mandatory needs for skew.yaml (using iam metadata associated and default boto3 credentials initialization)
+  - expose function and hide details of yaml format
 - aws client:
   - Fix Error and termination BUG with awsclient
   - Add boto3 config default with retries={"max_attempts": 20, "mode": "adaptive"}
+  - add max_attempts_on_client_error to avoid infinite loop
+  - add utilities (caller id, default activated region)
+  - extract boto module
+  - define all parameters
+  - add client factory
 - Resource Enumeration:
   - Fix resource enumeration when no resource type is define
   - Rewrote filtering resource and add a warning if filter operation is missing when needed
@@ -21,6 +28,7 @@
   - Change enumerate to avoir loading all resources loaded in memory
   - Add lazy loading of full data with method _load_extra_attribute on Resource
   - Add lazy load per item on Log group for log_streams, metric_filters, queries, subscriptions
+  - Add aws client parameter utility
 - Additional Ressource and details:
   - Group users, policy inline and attached
   - kinesis description

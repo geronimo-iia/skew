@@ -14,7 +14,7 @@
 import os
 
 from skew.arn import ARN
-from skew.awsdefaults import get_all_activated_regions, get_caller_identity_account_id
+from skew.boto import get_all_activated_regions, get_caller_identity_account_id
 
 __all__ = [
     "__version__",

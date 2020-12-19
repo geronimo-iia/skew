@@ -25,14 +25,13 @@ LOG = logging.getLogger(__name__)
 class CloudTrail(AWSResource):
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
+
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         try:
             data = client.call("list_trails", query="Trails[]")
             if data:
                 if account and account != "*":
-                    data = filter(
-                        lambda d: account == d["TrailARN"].split(":")[4], data
-                    )
+                    data = filter(lambda d: account == d["TrailARN"].split(":")[4], data)
                 if region and region != "*":
                     data = filter(lambda d: region == d["HomeRegion"], data)
                 if resource_id and resource_id != "*":

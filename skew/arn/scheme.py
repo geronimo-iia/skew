@@ -13,6 +13,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .arn import ARN
+from .component import ARNComponent, LOG
 
-__all__ = ["ARN"]
+__all__ = ["Scheme"]
+
+
+class Scheme(ARNComponent):
+    def choices(self, context=None):
+        return ["arn"]
+
+    def enumerate(self, context, **kwargs):
+        LOG.debug("Scheme.enumerate %s", context)
+        for match in self.matches(context):
+            context.append(match)
+            for provider in self._arn.provider.enumerate(context, **kwargs):
+                yield provider
+            context.pop()

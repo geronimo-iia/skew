@@ -57,15 +57,13 @@ class Filesystem(AWSResource):
 
     @classmethod
     def set_tags(cls, arn, region, account, tags, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         tags_list = [dict(Key=k, Value=str(v)) for k, v in tags.items()]
         x = client.call("create_tags", FileSystemId=arn.split("/")[-1], Tags=tags_list)
         return x
 
     @classmethod
     def unset_tags(cls, arn, region, account, tag_keys, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
-        x = client.call(
-            "delete_tags", FileSystemId=arn.split("/")[-1], TagKeys=tag_keys
-        )
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
+        x = client.call("delete_tags", FileSystemId=arn.split("/")[-1], TagKeys=tag_keys)
         return x

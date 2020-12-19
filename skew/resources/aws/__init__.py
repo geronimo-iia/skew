@@ -24,6 +24,8 @@ from skew.resources.resource import Resource
 
 LOG = logging.getLogger(__name__)
 
+__all__ = ["ArnComponents", "MetricData", "AWSResource"]
+
 
 class MetricData(object):
     """
@@ -102,15 +104,7 @@ class AWSResource(Resource):
         pass
 
     def __init__(self, client, data, query=None):
-        super(AWSResource, self).__init__(client=client, data=data)
-        self._query = query
-        self.filtered_data = self._query.search(self._data) if self._query else None
-        self._cloudwatch = None
-        if hasattr(self.Meta, "dimension") and self.Meta.dimension:
-            self._cloudwatch = skew.awsclient.get_awsclient(
-                "cloudwatch", self._client.region_name, self._client.account_id
-            )
-        self._tags = None
+        super(AWSResource, self).__init__(client=client, data=data, query=query)
         self._extra_attribute_loaded = False
 
     def __repr__(self):
@@ -123,16 +117,6 @@ class AWSResource(Resource):
                 self._load_extra_attribute()
             self._extra_attribute_loaded = True
         return super(AWSResource, self).data
-
-    @property
-    def arn(self):
-        return "arn:aws:%s:%s:%s:%s/%s" % (
-            self._client.service_name,
-            self._client.region_name,
-            self._client.account_id,
-            self.resourcetype,
-            self.id,
-        )
 
     @property
     def metrics(self):
@@ -189,9 +173,7 @@ class AWSResource(Resource):
         # python2.6 does not have timedelta.total_seconds() so we have
         # to calculate this ourselves.  This is straight from the
         # datetime docs.
-        return (
-            delta.microseconds + (delta.seconds + delta.days * 24 * 3600) * 10 ** 6
-        ) / 10 ** 6
+        return (delta.microseconds + (delta.seconds + delta.days * 24 * 3600) * 10 ** 6) / 10 ** 6
 
     def get_metric_data(
         self,
@@ -288,14 +270,17 @@ class AWSResource(Resource):
         return result
 
     def _feed_from_spec(self, attr_spec):
-        """Utilty to call boto3 on demand."""
+        """Utilty to call boto3 on demand.
+        Remove ResponseMetadata if needed.
+        """
         method, path, param_name, param_value = attr_spec[:4]
         kwargs = {param_name: getattr(self, param_value)}
         if path:
             kwargs["query"] = path
-        return self._client.call(method, **kwargs)
+        data = self._client.call(method, **kwargs)
+        if "ResponseMetadata" in data:
+            del data["ResponseMetadata"]
+        return data
 
 
-ArnComponents = namedtuple(
-    "ArnComponents", ["scheme", "provider", "service", "region", "account", "resource"]
-)
+ArnComponents = namedtuple("ArnComponents", ["scheme", "provider", "service", "region", "account", "resource"])

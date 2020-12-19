@@ -16,19 +16,30 @@
 import logging
 import jmespath
 
-from skew.awsclient import get_awsclient
 from skew.resources.json_dump import json_dump
 
 from botocore.exceptions import ClientError
 
 LOG = logging.getLogger(__name__)
 
+__all__ = ["Resource"]
+
 
 class Resource(object):
     @classmethod
+    def get_awsclient(cls, region_name, account_id, **kwargs):
+        """Get aws client and merge parameters."""
+        return get_awsclient(
+            **{**kwargs, "service_name": cls.Meta.service, "region_name": region_name, "account_id": account_id}
+        )
+
+    @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
-        kwargs = {}
+
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
+
+        op_kwargs = {}
+
         do_client_side_filtering = False
         if resource_id and resource_id != "*":
             # If we are looking for a specific resource and the
@@ -39,19 +50,21 @@ class Resource(object):
             filter_name = cls.Meta.filter_name
             if filter_name:
                 if cls.Meta.filter_type == "arn":
-                    kwargs[filter_name] = [str(arn)]
+                    op_kwargs[filter_name] = [str(arn)]
                 elif cls.Meta.filter_type == "list":
-                    kwargs[filter_name] = [resource_id]
+                    op_kwargs[filter_name] = [resource_id]
                 else:
-                    kwargs[filter_name] = resource_id
+                    op_kwargs[filter_name] = resource_id
             else:
                 do_client_side_filtering = True
+
         enum_op, path, extra_args = cls.Meta.enum_spec
         if extra_args:
-            kwargs.update(extra_args)
+            op_kwargs.update(extra_args)
         LOG.debug("enum_spec=%s" % str(cls.Meta.enum_spec))
+
         try:
-            data = client.call(enum_op, query=path, **kwargs)
+            data = client.call(enum_op, query=path, **op_kwargs)
             if data:
                 if do_client_side_filtering:
                     data = filter(lambda d: cls.filter(arn, resource_id, d), data)
@@ -71,29 +84,27 @@ class Resource(object):
         date = None
         name = None
 
-    def __init__(self, client, data):
+    def __init__(self, client, data, query=None):
         self._client = client
         self._data = data if data else {}
-        if hasattr(self.Meta, "id") and isinstance(self._data, dict):
-            self._id = self._data.get(self.Meta.id, "")
-        else:
-            self._id = ""
+        self._id = self._data.get(self.Meta.id, "") if hasattr(self.Meta, "id") and isinstance(self._data, dict) else ""
         self._metrics = None
         self._name = None
         self._date = None
+        self._arn = None
+        self._tags = None
+        self._cloudwatch = self._client.create_client(service="cloudwatch") if hasattr(self.Meta, "dimension") and self.Meta.dimension else None
+        self._query = query
+        self.filtered_data = self._query.search(self._data) if self._query else None
 
     def __repr__(self):
         return self.arn
 
     @property
     def arn(self):
-        return "arn:aws:%s:%s:%s:%s/%s" % (
-            self._client.service_name,
-            self._client.region_name,
-            self._client.account_id,
-            self.resourcetype,
-            self.id,
-        )
+        if not self._arn:
+            self._arn = f"arn:aws:{self._client.service_name}:{self._client.region_name}:{self._client.account_id}:{self.resourcetype}/{self.id}"
+        return self._arn
 
     @property
     def data(self):
@@ -122,6 +133,10 @@ class Resource(object):
         if not self._date:
             self._date = jmespath.search(self.Meta.date, self._data)
         return self._date
+
+    @property
+    def tags(self):
+        return self._tags
 
     @property
     def metrics(self):

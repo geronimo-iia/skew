@@ -33,10 +33,6 @@ class LoadBalancer(AWSResource):
         dimension = None
         tags_spec = ("describe_tags", "TagDescriptions[].Tags[]", "ResourceArns", "id")
 
-    @property
-    def arn(self):
-        return self._data["LoadBalancerArn"]
-
     def __init__(self, client, data, query=None):
         super(LoadBalancer, self).__init__(client, data, query)
         if data and "LoadBalancerArn" in data:
@@ -44,6 +40,7 @@ class LoadBalancer(AWSResource):
             params = {param_name: self._data["LoadBalancerArn"]}
             data = client.call(detail_op, **params)
             self._data["Listeners"] = jmespath.search(detail_path, data)
+            self._arn = self._data["LoadBalancerArn"]
 
 
 class TargetGroup(AWSResource):

@@ -25,19 +25,8 @@ def _make_directory(path):
 
 
 def _call_back(resource):
+    # force loading tags
     resource.tags
-    if resource.Meta.service == "s3":
-        resource.location
-        resource.acl
-        resource.cors
-        resource.encryption
-        resource.lifecycle
-        resource.logging
-        resource.policy
-        resource.policy_status
-        resource.notifications
-        resource.versioning
-        resource.website
 
 
 def _create_parser():

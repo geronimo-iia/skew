@@ -38,10 +38,6 @@ class Topic(AWSResource):
         LOG.debug("%s == %s", arn, topic_arn)
         return arn == topic_arn
 
-    @property
-    def arn(self):
-        return self._data.get("TopicArn")
-
     def __init__(self, client, data, query=None):
         super(Topic, self).__init__(client, data, query)
 
@@ -52,6 +48,7 @@ class Topic(AWSResource):
         data = client.call(detail_op, **params)
 
         self._data = jmespath.search(detail_path, data)
+        self._arn = self._data.get("TopicArn")
 
 
 class Subscription(AWSResource):
@@ -70,15 +67,9 @@ class Subscription(AWSResource):
         date = None
         dimension = None
 
-    @property
-    def arn(self):
-        return self._data.get("SubscriptionArn")
-
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = super(Subscription, cls).enumerate(
-            arn, region, account, resource_id, **kwargs
-        )
+        resources = super(Subscription, cls).enumerate(arn, region, account, resource_id, **kwargs)
 
         return [r for r in resources if r.id not in cls.invalid_arns]
 
@@ -97,3 +88,4 @@ class Subscription(AWSResource):
         data = client.call(detail_op, **params)
 
         self._data = jmespath.search(detail_path, data)
+        self._arn = self._data.get("SubscriptionArn")

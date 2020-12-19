@@ -47,7 +47,7 @@ class AutoScalingGroup(AWSResource):
 
     @classmethod
     def set_tags(cls, arn, region, account, tags, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         asg_name = arn.split(":")[7].split("/")[1]
         addon = dict(
             ResourceId=asg_name,
@@ -59,7 +59,7 @@ class AutoScalingGroup(AWSResource):
 
     @classmethod
     def unset_tags(cls, arn, region, account, tag_keys, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         asg_name = arn.split(":")[7].split("/")[1]
         addon = dict(
             ResourceId=asg_name,

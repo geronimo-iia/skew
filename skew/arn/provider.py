@@ -13,6 +13,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .arn import ARN
 
-__all__ = ["ARN"]
+from .component import ARNComponent, LOG
+
+__all__ = ["Provider"]
+
+
+class Provider(ARNComponent):
+    def choices(self, context=None):
+        return ["aws"]
+
+    def enumerate(self, context, **kwargs):
+        LOG.debug("Provider.enumerate %s", context)
+        for match in self.matches(context):
+            context.append(match)
+            for service in self._arn.service.enumerate(context, **kwargs):
+                yield service
+            context.pop()

@@ -26,7 +26,7 @@ LOG = logging.getLogger(__name__)
 class Registery(AWSResource):
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         try:
             data = client.call("describe_registry")
             if data:
@@ -53,7 +53,7 @@ class Registery(AWSResource):
 class Repository(AWSResource):
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        client = get_awsclient(cls.Meta.service, region, account, **kwargs)
+        client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         try:
             param = {"registryId": account}
             if resource_id and resource_id != "*":

@@ -39,8 +39,7 @@ class Identity(AWSResource):
 
     def __init__(self, client, data, query=None):
         super(Identity, self).__init__(client, data, query)
-        arn = self._data
-        self._data = {"IdentityName": arn}
+        self._data = {"IdentityName": self._data}
 
     @property
     def arn(self):

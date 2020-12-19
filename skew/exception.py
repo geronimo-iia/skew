@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+__all__ = ["ConfigNotFoundError", "ClientError", "ServerError"]
+
 
 class ConfigNotFoundError(Exception):
 
@@ -20,11 +22,8 @@ class ConfigNotFoundError(Exception):
 
 
 class BaseOperationError(Exception):
-
     def __init__(self, error_code, error_body, operation_name):
-        msg = 'Error(%d) when calling (%s): %s' % (error_code,
-                                                   operation_name,
-                                                   error_body)
+        msg = 'Error(%d) when calling (%s): %s' % (error_code, operation_name, error_body)
         super(BaseOperationError, self).__init__(msg)
         self.error_code = error_code
         self.error_body = error_body

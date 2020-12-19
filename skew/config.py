@@ -15,15 +15,15 @@
 
 import os
 import logging
-
+from typing import Optional, Dict
 import yaml
 
 from skew.exception import ConfigNotFoundError
-from skew.awsdefaults import get_caller_identity_account_id
+from skew.boto import get_caller_identity_account_id
 
 LOG = logging.getLogger(__name__)
 
-__all__ = ["get_config"]
+__all__ = ["get_config", "get_credentials", "get_profile", "get_accounts"]
 
 _config = None
 
@@ -43,3 +43,17 @@ def get_config():
             _config["accounts"][get_caller_identity_account_id()] = {}
             LOG.warning(f"Default skew Configuration: {_config}")
     return _config
+
+
+def get_accounts():
+    return get_config()["accounts"]
+
+
+def get_credentials(account_id: str) -> Optional[Dict[str, str]]:
+    _config = get_config()
+    return _config["accounts"][account_id].get("credentials") if account_id in _config["accounts"] else None
+
+
+def get_profile(account_id: str) -> Optional[str]:
+    _config = get_config()
+    return _config["accounts"][account_id].get("profile") if account_id in _config["accounts"] else None
