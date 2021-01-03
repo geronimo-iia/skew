@@ -58,3 +58,9 @@ docs/_build/
 
 datalake_auditor
 data
+
+# Build and release directories
+/build/
+/dist/
+*.spec
+.install
