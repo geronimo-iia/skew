@@ -16,6 +16,7 @@ import os
 import argparse
 import skew
 
+
 def _make_directory(path):
     try:
         os.makedirs(path)
@@ -60,26 +61,30 @@ def _create_parser():
     return parser
 
 
-args = _create_parser().parse_args()
+def main():
+    args = _create_parser().parse_args()
+
+    _uri = str(args.uri[0])
+    _output_path = args.output_path[0]
+    for resource in skew.scan(_uri):
+        _call_back(resource)
+        directory = None
+        identifier = None
+        if "/" in resource.arn:
+            data = resource.arn.split("/")
+            identifier = data.pop(-1)
+            data = ":".join(data).split(":")
+            directory = os.path.join(_output_path, *data)
+        else:
+            data = resource.arn.split(":")
+            identifier = data.pop(-1)
+            directory = os.path.join(_output_path, *data)
+
+        _make_directory(directory)
+
+        with open(os.path.join(directory, f"{identifier}.json"), "w") as f:
+            f.write((resource.json_dump(normalize=args.normalize)))
 
 
-_uri = str(args.uri[0])
-_output_path = args.output_path[0]
-for resource in skew.scan(_uri):
-    _call_back(resource)
-    directory = None
-    identifier = None
-    if "/" in resource.arn:
-        data = resource.arn.split("/")
-        identifier = data.pop(-1)
-        data = ":".join(data).split(":")
-        directory = os.path.join(_output_path, *data)
-    else:
-        data = resource.arn.split(":")
-        identifier = data.pop(-1)
-        directory = os.path.join(_output_path, *data)
-
-    _make_directory(directory)
-
-    with open(os.path.join(directory, f"{identifier}.json"), "w") as f:
-        f.write((resource.json_dump(normalize=args.normalize)))
+if __name__ == "__main__":
+    main()
