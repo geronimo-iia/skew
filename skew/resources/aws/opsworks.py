@@ -17,8 +17,6 @@
 import logging
 
 from skew.resources.aws import AWSResource
-from skew.awsclient import get_awsclient
-
 
 LOG = logging.getLogger(__name__)
 

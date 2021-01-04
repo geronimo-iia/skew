@@ -1,7 +1,9 @@
 import os
 import unittest
+
 import mock
-from skew.config import get_config, get_accounts, get_credentials, get_profile
+
+from skew.config import get_accounts, get_config, get_credentials, get_profile
 
 
 class TestConfig(unittest.TestCase):

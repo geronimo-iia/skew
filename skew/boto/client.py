@@ -12,16 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Optional, Dict, Any
 import logging
 import time
+from typing import Any, Dict, Optional
 
-import datetime
 import jmespath
-import boto3
-from botocore.exceptions import ClientError
 from botocore.config import Config
-import botocore
+from botocore.exceptions import ClientError
 
 from .utility import get_client, get_session
 
@@ -105,9 +102,9 @@ class AWSClient(object):
         return self._account_id
 
     def call(self, op_name, query=None, **kwargs):
-        """
-        Make a request to a method in this client.  The response data is
-        returned from this call as native Python data structures.
+        """Make a request to a method in this client.
+
+        The response data is returned from this call as native Python data structures.
 
         This method differs from just calling the client method directly
         in the following ways:

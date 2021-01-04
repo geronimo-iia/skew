@@ -13,13 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .component import ARNComponent, LOG
+"""Resource module."""
 from skew.resources import all_types, find_resource_class
+
+from .component import LOG, ARNComponent
 
 __all__ = ["Resource"]
 
 
 class Resource(ARNComponent):
+    """Resource definition."""
+
     def _split_resource(self, resource):
         LOG.debug("split_resource: %s", resource)
         if "/" in resource:
@@ -38,9 +42,9 @@ class Resource(ARNComponent):
             resource_id = resource
         return (resource_type, resource_id)
 
-    def match(self, pattern, context=None):
+    def _match(self, pattern, context=None):
         resource_type, _ = self._split_resource(pattern)
-        return super(Resource, self).match(resource_type, context)
+        return super(Resource, self)._match(resource_type, context)
 
     def choices(self, context=None):
         if context:

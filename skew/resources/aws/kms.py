@@ -13,12 +13,7 @@
 
 import logging
 
-import jmespath
-
-from botocore.exceptions import ClientError
 from skew.resources.aws import AWSResource
-from skew.awsclient import get_awsclient
-
 
 LOG = logging.getLogger(__name__)
 
@@ -52,15 +47,7 @@ class Key(AWSResource):
 
     def __init__(self, client, data, query=None):
         super(Key, self).__init__(client, data, query)
-        self._data["KeyMetadata"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["describe"]
-        )
-        self._data["Policy"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["key_policy"]
-        )
-        self._data["KeyRotationEnabled"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["key_rotation_status"]
-        )
-        self._data["Aliases"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["aliases"]
-        )
+        self._data["KeyMetadata"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["describe"])
+        self._data["Policy"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["key_policy"])
+        self._data["KeyRotationEnabled"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["key_rotation_status"])
+        self._data["Aliases"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["aliases"])

@@ -16,7 +16,6 @@ from skew.resources.aws import AWSResource
 
 
 class Cluster(AWSResource):
-
     class Meta(object):
         service = 'redshift'
         type = 'cluster'

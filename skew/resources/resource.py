@@ -14,11 +14,12 @@
 # language governing permissions and limitations under the License.
 
 import logging
-import jmespath
 
-from skew.resources.json_dump import json_dump
-from skew.awsclient import get_awsclient
+import jmespath
 from botocore.exceptions import ClientError
+
+from skew.awsclient import get_awsclient
+from skew.resources.json_dump import json_dump
 
 LOG = logging.getLogger(__name__)
 
@@ -93,7 +94,11 @@ class Resource(object):
         self._date = None
         self._arn = None
         self._tags = None
-        self._cloudwatch = self._client.create_client(service="cloudwatch") if hasattr(self.Meta, "dimension") and self.Meta.dimension else None
+        self._cloudwatch = (
+            self._client.create_client(service="cloudwatch")
+            if hasattr(self.Meta, "dimension") and self.Meta.dimension
+            else None
+        )
         self._query = query
         self.filtered_data = self._query.search(self._data) if self._query else None
 
@@ -103,7 +108,10 @@ class Resource(object):
     @property
     def arn(self):
         if not self._arn:
-            self._arn = f"arn:aws:{self._client.service_name}:{self._client.region_name}:{self._client.account_id}:{self.resourcetype}/{self.id}"
+            self._arn = (
+                f"arn:aws:{self._client.service_name}:{self._client.region_name}"
+                f":{self._client.account_id}:{self.resourcetype}/{self.id}"
+            )
         return self._arn
 
     @property

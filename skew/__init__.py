@@ -10,9 +10,10 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+"""skew module."""
 
-import os
-from pkg_resources import get_distribution, DistributionNotFound
+from pkg_resources import DistributionNotFound, get_distribution
+
 from skew.arn import ARN
 from skew.boto import get_all_activated_regions, get_caller_identity_account_id
 
@@ -31,8 +32,7 @@ except DistributionNotFound:  # pragma: no cover
 
 
 def scan(sku, **kwargs):
-    """
-    Scan (i.e. look up) a SKU.
+    """Scan (i.e. look up) a SKU.
 
     The main interface into the skew library.  Pass in a SKU and we try
     to look it up and return the appropriate data.

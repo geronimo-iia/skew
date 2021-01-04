@@ -16,7 +16,6 @@
 import jmespath
 
 from skew.resources.aws import AWSResource
-from skew.awsclient import get_awsclient
 
 
 class AutoScalingGroup(AWSResource):
@@ -49,11 +48,11 @@ class AutoScalingGroup(AWSResource):
     def set_tags(cls, arn, region, account, tags, resource_id=None, **kwargs):
         client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         asg_name = arn.split(":")[7].split("/")[1]
-        addon = dict(
-            ResourceId=asg_name,
-            ResourceType="auto-scaling-group",
-            PropagateAtLaunch=False,
-        )
+        addon = {
+            "ResourceId": asg_name,
+            "ResourceType": "auto-scaling-group",
+            "PropagateAtLaunch": False,
+        }
         tags_list = [dict(Key=k, Value=str(v), **addon) for k, v in tags.items()]
         return client.call("create_or_update_tags", Tags=tags_list)
 
@@ -61,11 +60,11 @@ class AutoScalingGroup(AWSResource):
     def unset_tags(cls, arn, region, account, tag_keys, resource_id=None, **kwargs):
         client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
         asg_name = arn.split(":")[7].split("/")[1]
-        addon = dict(
-            ResourceId=asg_name,
-            ResourceType="auto-scaling-group",
-            PropagateAtLaunch=False,
-        )
+        addon = {
+            "ResourceId": asg_name,
+            "ResourceType": "auto-scaling-group",
+            "PropagateAtLaunch": False,
+        }
         tags_list = [dict(Key=k, **addon) for k in tag_keys]
         return client.call("delete_tags", Tags=tags_list)
 

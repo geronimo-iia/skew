@@ -13,11 +13,11 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-import jmespath
 import logging
+
 from botocore.exceptions import ClientError
+
 from skew.resources.aws import AWSResource
-from skew.awsclient import get_awsclient
 
 LOG = logging.getLogger(__name__)
 

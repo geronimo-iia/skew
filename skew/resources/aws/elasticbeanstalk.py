@@ -24,8 +24,7 @@ class Application(AWSResource):
         name = 'ApplicationName'
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'ResourceTags[]',
-                     'ResourceArn', 'arn')
+        tags_spec = ('list_tags_for_resource', 'ResourceTags[]', 'ResourceArn', 'arn')
 
 
 class Environment(AWSResource):
@@ -40,8 +39,7 @@ class Environment(AWSResource):
         name = 'EnvironmentName'
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'ResourceTags[]',
-                     'ResourceArn', 'arn')
+        tags_spec = ('list_tags_for_resource', 'ResourceTags[]', 'ResourceArn', 'arn')
 
     @property
     def arn(self):
@@ -51,5 +49,5 @@ class Environment(AWSResource):
             self._client.account_id,
             self.resourcetype,
             self._data['ApplicationName'],
-            self.id
+            self.id,
         )

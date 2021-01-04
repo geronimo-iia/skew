@@ -13,13 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from .component import ARNComponent, LOG
+"""Provider module."""
+from .component import LOG, ARNComponent
 
 __all__ = ["Provider"]
 
 
 class Provider(ARNComponent):
+    """Provider definition."""
+
     def choices(self, context=None):
         return ["aws"]
 

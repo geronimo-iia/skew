@@ -13,14 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from .component import ARNComponent, LOG
+"""Account module."""
 from skew.config import get_accounts
+
+from .component import LOG, ARNComponent
 
 __all__ = ["Account"]
 
 
 class Account(ARNComponent):
+    """Account definition."""
+
     def __init__(self, pattern, arn):
         super(Account, self).__init__(pattern, arn)
         self._accounts = get_accounts()

@@ -10,15 +10,15 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-import unittest
 import os
+import unittest
 
 import mock
 
-import skew.resources
 import skew.awsclient
-from skew.resources.resource import Resource
+import skew.resources
 from skew.resources.definition import _RESOURCE_TYPES, find_resource_class
+from skew.resources.resource import Resource
 
 
 class FooResource(Resource):

@@ -14,11 +14,7 @@
 
 import logging
 
-import jmespath
-
 from skew.resources.aws import AWSResource
-from skew.awsclient import get_awsclient
-
 
 LOG = logging.getLogger(__name__)
 
@@ -58,7 +54,7 @@ class Filesystem(AWSResource):
     @classmethod
     def set_tags(cls, arn, region, account, tags, resource_id=None, **kwargs):
         client = cls.get_awsclient(region_name=region, account_id=account, **kwargs)
-        tags_list = [dict(Key=k, Value=str(v)) for k, v in tags.items()]
+        tags_list = [{"Key": k, "Value": str(v)} for k, v in tags.items()]
         x = client.call("create_tags", FileSystemId=arn.split("/")[-1], Tags=tags_list)
         return x
 

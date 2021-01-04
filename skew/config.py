@@ -12,13 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import os
+"""config module."""
 import logging
-from typing import Optional, Dict
+import os
+from typing import Dict, Optional
+
 import yaml
 
-from skew.exception import ConfigNotFoundError
 from skew.boto import get_caller_identity_account_id
 
 LOG = logging.getLogger(__name__)
@@ -29,6 +29,7 @@ _config = None
 
 
 def get_config():
+    """Return skew configuration."""
     global _config
     if _config is None:
         path = os.environ.get("SKEW_CONFIG", os.path.join("~", ".skew"))
@@ -46,14 +47,17 @@ def get_config():
 
 
 def get_accounts():
+    """Return skew configuration accounts."""
     return get_config()["accounts"]
 
 
 def get_credentials(account_id: str) -> Optional[Dict[str, str]]:
+    """Return skew configuration account credentials."""
     _config = get_config()
     return _config["accounts"][account_id].get("credentials") if account_id in _config["accounts"] else None
 
 
 def get_profile(account_id: str) -> Optional[str]:
+    """Return skew configuration account profile."""
     _config = get_config()
     return _config["accounts"][account_id].get("profile") if account_id in _config["accounts"] else None

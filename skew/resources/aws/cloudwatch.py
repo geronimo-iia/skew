@@ -12,8 +12,8 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-import jmespath
 import logging
+
 from skew.resources.aws import AWSResource
 
 LOG = logging.getLogger(__name__)
@@ -118,7 +118,7 @@ class LogGroup(AWSResource):
         return data
 
     @property
-    def logGroupName(self):
+    def log_group_name(self):
         return self.data.get("logGroupName")
 
     @property
@@ -142,7 +142,6 @@ class CloudWatchEventRule(AWSResource):
         filter_type = None
         name = "Name"
         attr_spec = ("list_targets_by_rule", "Targets[]", "Rule", "id")
-        # tags_spec = ("list_tags_log_group", "tags", "logGroupName", "id")
 
     @classmethod
     def filter(cls, arn, resource_id, data):

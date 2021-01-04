@@ -13,12 +13,9 @@
 
 import logging
 
-import jmespath
-
 from botocore.exceptions import ClientError
-from skew.resources.aws import AWSResource
-from skew.awsclient import get_awsclient
 
+from skew.resources.aws import AWSResource
 
 LOG = logging.getLogger(__name__)
 
@@ -32,9 +29,7 @@ class Registery(AWSResource):
             if data:
                 if "ResponseMetadata" in data:
                     del data["ResponseMetadata"]
-                data[
-                    "RegisteryUri"
-                ] = f"{data['registryId']}.dkr.ecr.{region}.amazonaws.com"
+                data["RegisteryUri"] = f"{data['registryId']}.dkr.ecr.{region}.amazonaws.com"
 
                 return [Registery(client, data, arn.query)]
         except ClientError as e:

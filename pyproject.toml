@@ -38,6 +38,7 @@ python-coveralls="*"
 coverage = {version = "^5", extras = ["toml"]} # Code coverage measurement for Python
 
 black = "^20.8b1" # The uncompromising code formatter.
+isort = "^5.6.4" #A Python utility / library to sort Python imports.
 # https://flakehell.readthedocs.io/
 flakehell = "^0.7.1"
 # https://github.com/DmytroLitvinov/awesome-flake8-extensions
@@ -63,6 +64,15 @@ target-version = ["py38"]
 skip-string-normalization = true
 line_length = 120
 
+[tool.isort]
+# see https://timothycrosley.github.io/isort/
+combine_as_imports = true
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+force_grid_wrap = 0
+ensure_newline_before_comments = true
+line_length = 120
 
 [tool.flakehell]
 exclude = ["README.md"]
@@ -76,13 +86,13 @@ docstring-convention = "google"
 [tool.flakehell.plugins]
 #flake8-bandit = ["+*", "-S322"]
 flake8-bugbear = ["+*"]
-flake8-builtins = ["+*"]
+flake8-builtins = ["+*", "-A003"]
 flake8-comprehensions = ["+*"]
 #flake8-darglint = ["+*", "-DAR201"]
 # explicitly disable plugin
-flake8-docstrings = ["+*", "-D107", "-D100"]
+flake8-docstrings = ["+*", "-D107", "-D100", "-D105", "-D102", "-D106", "-D101"]
 flake8-eradicate = ["+*"]
-#flake8-isort = ["+*"]
+flake8-isort = ["+*"]
 flake8-mutable = ["+*"]
 flake8-pytest-style = ["+*"]
 flake8-spellcheck = ["+*", "-SC200", "-SC100"]

@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import re
+"""Component module."""
 import logging
+import re
 
 __all__ = ["ARNComponent", "LOG"]
 
@@ -23,7 +23,9 @@ LOG = logging.getLogger("skew.arn")
 
 
 class ARNComponent(object):
-    def __init__(self, pattern, arn: "ARN"):
+    """Arn component base class."""
+
+    def __init__(self, pattern, arn):
         self.pattern = pattern
         # arn is Arn parent instance
         self._arn = arn
@@ -32,7 +34,8 @@ class ARNComponent(object):
         return self.pattern
 
     def choices(self, context=None):
-        """
+        """Return all choices for the value of this component.
+
         This method is responsible for returning all of the possible
         choices for the value of this component.
 
@@ -46,8 +49,9 @@ class ARNComponent(object):
         """
         return []
 
-    def match(self, pattern, context=None):
-        """
+    def _match(self, pattern, context=None):
+        """Return a list which match choices against pattern.
+
         This method returns a (possibly empty) list of strings that
         match the regular expression ``pattern`` provided.  You can
         also provide a ``context`` as described above.
@@ -70,11 +74,13 @@ class ARNComponent(object):
         return matches
 
     def matches(self, context=None):
-        """
+        """Return a list which match choices against ``pattern`` attribute.
+
         This is a convenience method to return all possible matches
         filtered by the current value of the ``pattern`` attribute.
         """
-        return self.match(self.pattern, context)
+        return self._match(self.pattern, context)
 
     def complete(self, prefix="", context=None):
+        """Return a list of choices for the specified context and prefix."""
         return [c for c in self.choices(context) if c.startswith(prefix)]

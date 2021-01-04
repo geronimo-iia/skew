@@ -50,10 +50,9 @@ requirements.txt: poetry.lock ## Generate requirements.txt
 
 .PHONY: check
 check: install   ## Run linters and static analysis
-	#poetry run isort $(PACKAGES)
+	poetry run isort $(PACKAGES)
 	poetry run black $(PACKAGES)
 	poetry run flakehell lint $(PACKAGE)
-	#poetry run mypy --show-error-codes --config-file pyproject.toml $(PACKAGE)
 
 # TESTS #######################################################################
 
@@ -79,7 +78,7 @@ $(DIST_FILES): $(MODULES) pyproject.toml
 publish: build ## Publishes the package, previously built with the build command, to the remote repository
 	@git diff --name-only --exit-code
 	poetry publish
-	@PROJECT_RELEASE=$$(poetry run python -c "import c4_model; print(c4_model.__version__);") && \
+	@PROJECT_RELEASE=$$(poetry run python -c "import skew; print(skew.__version__);") && \
 		git tag "v$$PROJECT_RELEASE" && \
 		git push origin "v$$PROJECT_RELEASE"
 

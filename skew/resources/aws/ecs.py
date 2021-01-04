@@ -19,7 +19,6 @@ import jmespath
 
 from skew.resources.aws import AWSResource
 
-
 LOG = logging.getLogger(__name__)
 
 
@@ -59,9 +58,7 @@ class Cluster(AWSResource):
                 "services": [service_arn],
                 "include": ["TAGS"],
             }
-            service_def = self._client.call(
-                "describe_services", query="services[0]", **kwargs
-            )
+            service_def = self._client.call("describe_services", query="services[0]", **kwargs)
             self._data["services"][service_def["serviceName"]] = service_def
 
 

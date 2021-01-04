@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import List, Optional, Dict, Any
 import os
-import boto3
 from functools import lru_cache
+from typing import Any, Dict, List, Optional
+
+import boto3
 from botocore.config import Config
 
 __all__ = [
@@ -78,7 +79,6 @@ def get_session(
         placebo_data_path (Optional[str]): optional placebo data path
         placebo_mode Optional[str]: optional placebo mode (default 'record')
     """
-
     params = {}
 
     if region_name:
@@ -134,5 +134,5 @@ def get_client(
 
 
 def get_caller_identity_account_id() -> str:
-    """Returns aws identity of the caller."""
+    """Return aws identity of the caller."""
     return get_client(get_default_session(), service_name="sts").get_caller_identity()["Account"]

@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 import argparse
+import os
+
 import skew
 
 
@@ -62,6 +63,7 @@ def _create_parser():
 
 
 def main():
+    """Define entry point for cli."""
     args = _create_parser().parse_args()
 
     _uri = str(args.uri[0])

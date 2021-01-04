@@ -19,9 +19,7 @@ from skew.resources.aws import AWSResource
 class Stack(AWSResource):
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = list(
-            super(Stack, cls).enumerate(arn, region, account, resource_id, **kwargs)
-        )
+        resources = list(super(Stack, cls).enumerate(arn, region, account, resource_id, **kwargs))
         return resources
 
     class Meta(object):

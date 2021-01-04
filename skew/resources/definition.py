@@ -14,7 +14,7 @@
 # language governing permissions and limitations under the License.
 
 import importlib
-from typing import List, Dict
+from typing import Dict, List
 
 __all__ = ["all_providers", "all_services", "all_types", "find_resource_class"]
 
@@ -92,6 +92,7 @@ _RESOURCE_TYPES: Dict[str, str] = {
 
 
 def all_providers():
+    """Return all providers defined in resource types."""
     providers = set()
     for resource_type in _RESOURCE_TYPES:
         providers.add(resource_type.split(".")[0])
@@ -99,6 +100,7 @@ def all_providers():
 
 
 def all_services(provider_name: str) -> List[str]:
+    """Return all services defined in resource types."""
     services = set()
     for resource_type in _RESOURCE_TYPES:
         t = resource_type.split(".")
@@ -108,6 +110,7 @@ def all_services(provider_name: str) -> List[str]:
 
 
 def all_types(provider_name: str, service_name: str) -> List[str]:
+    """Return all types defined in resource types."""
     types = set()
     for resource_type in _RESOURCE_TYPES:
         t = resource_type.split(".")

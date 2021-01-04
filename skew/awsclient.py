@@ -12,10 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from skew.config import get_credentials, get_profile
+"""aws client module."""
+from typing import Any, Dict, Optional
 
-from typing import Optional, Dict, Any
 from botocore.config import Config
+
 from skew.boto import AWSClient
 from skew.config import get_credentials, get_profile
 
@@ -34,9 +35,9 @@ def get_awsclient(
     max_attempts: int = 20,
     config: Optional[Config] = None,
     max_attempts_on_client_error: int = 10,
-    **kwargs # ignore extra arguments
+    **kwargs,  # ignore extra arguments
 ):
-
+    """Return a configured aws client."""
     # credential management
     if profile_name is None:
         aws_creds = get_credentials(account_id=account_id)

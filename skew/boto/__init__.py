@@ -14,15 +14,13 @@
 """Boto3 utility."""
 from .client import AWSClient
 from .utility import (
-    get_default_region,
-    get_default_region,
     get_all_activated_regions,
     get_caller_identity_account_id,
+    get_client,
+    get_default_region,
     get_default_session,
     get_session,
-    get_client,
 )
-
 
 __all__ = [
     "AWSClient",

@@ -14,7 +14,9 @@
 # language governing permissions and limitations under the License.
 
 import logging
+
 import jmespath
+
 from skew.resources.aws import AWSResource
 
 LOG = logging.getLogger(__name__)
@@ -60,15 +62,9 @@ class Group(IAMResource):
         return resource_id == data["GroupName"]
 
     def _load_extra_attribute(self):
-        self._data["Users"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["users"]
-        )
-        self._data["PolicyNames"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["policy_names"]
-        )
-        self._data["AttachedPolicies"] = self._feed_from_spec(
-            attr_spec=self.Meta.attr_spec["attached_group_policies"]
-        )
+        self._data["Users"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["users"])
+        self._data["PolicyNames"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["policy_names"])
+        self._data["AttachedPolicies"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["attached_group_policies"])
 
 
 class User(IAMResource):
@@ -88,7 +84,6 @@ class User(IAMResource):
                 "AttachedPolicies",
             ),
             ("list_ssh_public_keys", "UserName", "SSHPublicKeys", "SSHPublicKeys"),
-            # ('list_mfa_devices', 'UserName', 'MFADevices', 'MFADevices'),
         ]
         id = "UserId"
         filter_name = None

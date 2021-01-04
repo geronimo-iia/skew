@@ -9,12 +9,12 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-from skew.resources.aws import AWSResource
-
 import jmespath
 
-class DeliveryStream(AWSResource):
+from skew.resources.aws import AWSResource
 
+
+class DeliveryStream(AWSResource):
     class Meta(object):
         service = 'firehose'
         type = 'deliverystream'

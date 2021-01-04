@@ -13,13 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from .component import ARNComponent, LOG
+"""Region module."""
+from .component import LOG, ARNComponent
 
 __all__ = ["Region"]
 
 
 class Region(ARNComponent):
+    """Region definition."""
+
     _all_region_names = [
         "us-east-1",
         "us-east-2",

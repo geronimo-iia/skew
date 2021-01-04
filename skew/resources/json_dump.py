@@ -11,11 +11,10 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 """Json utilities."""
-import urllib
-import re
-from typing import Dict, List
-import json
 import datetime
+import json
+import re
+from typing import Dict
 
 __all__ = ["json_dump", "custom_json_encoder", "camel_to_snake"]
 

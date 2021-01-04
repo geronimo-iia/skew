@@ -13,12 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from .component import ARNComponent, LOG
+"""Scheme module."""
+from .component import LOG, ARNComponent
 
 __all__ = ["Scheme"]
 
 
 class Scheme(ARNComponent):
+    """Scheme definition."""
+
     def choices(self, context=None):
         return ["arn"]
 

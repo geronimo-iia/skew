@@ -13,23 +13,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Optional, List
-from six.moves import zip_longest
-import jmespath
+"""Arn module."""
 import logging
+from typing import Optional
 
-from .component import ARNComponent, LOG
-from .scheme import Scheme
-from .provider import Provider
-from .service import Service
-from .region import Region
+import jmespath
+from six.moves import zip_longest
+
 from .account import Account
+from .provider import Provider
+from .region import Region
 from .resource import Resource
+from .scheme import Scheme
+from .service import Service
 
 __all__ = ["ARN"]
 
 
 class ARN(object):
+    """ARN definition."""
 
     ComponentClasses = [Scheme, Provider, Service, Region, Account, Resource]
 
@@ -65,7 +67,8 @@ class ARN(object):
         self.set_logger("skew", logging.DEBUG)
 
     def set_logger(self, logger_name, level=logging.DEBUG):
-        """
+        """Initialize a logger.
+
         Convenience function to quickly configure full debug output
         to go to the console.
         """
@@ -93,26 +96,32 @@ class ARN(object):
 
     @property
     def scheme(self) -> Scheme:
+        """Return sheme components."""
         return self._scheme
 
     @property
     def provider(self) -> Provider:
+        """Return provider components."""
         return self._provider
 
     @property
     def service(self) -> Service:
+        """Return service components."""
         return self._service
 
     @property
     def region(self) -> Region:
+        """Return region components."""
         return self._region
 
     @property
     def account(self) -> Account:
+        """Return account components."""
         return self._account
 
     @property
     def resource(self) -> Resource:
+        """Return resource components."""
         return self._resource
 
     def __iter__(self):

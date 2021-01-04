@@ -17,16 +17,13 @@ import logging
 
 from skew.resources.aws import AWSResource
 
-
 LOG = logging.getLogger(__name__)
 
 
 class Function(AWSResource):
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = list(
-            super(Function, cls).enumerate(arn, region, account, resource_id, **kwargs)
-        )
+        resources = list(super(Function, cls).enumerate(arn, region, account, resource_id, **kwargs))
         for r in resources:
             r.data["EventSources"] = []
             kwargs = {"FunctionName": r.data["FunctionName"]}

@@ -12,7 +12,7 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
+"""resources module."""
 from .definition import all_providers, all_services, all_types, find_resource_class
-
 
 __all__ = ["all_providers", "all_services", "all_types", "find_resource_class"]

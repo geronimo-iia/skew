@@ -12,14 +12,13 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-
-import logging
+"""aws module."""
 import datetime
+import logging
 from collections import namedtuple
 
 import jmespath
 
-import skew.awsclient
 from skew.resources.resource import Resource
 
 LOG = logging.getLogger(__name__)
@@ -28,7 +27,8 @@ __all__ = ["ArnComponents", "MetricData", "AWSResource"]
 
 
 class MetricData(object):
-    """
+    """MetricData Definition.
+
     This is a simple object that allows us to compose both the returned
     data from a call to ``get_metrics_data`` as well as the period that
     was used when getting the data from CloudWatch.  Since the period
@@ -42,7 +42,8 @@ class MetricData(object):
 
 
 class AWSResource(Resource):
-    """
+    """AWSResource definition.
+
     Each Resource class defines a Config variable at the class level.  This
     is a dictionary that gives the specifics about which service the resource
     belongs to and how to enumerate the resource.
@@ -95,7 +96,8 @@ class AWSResource(Resource):
 
     @classmethod
     def filter(cls, arn, resource_id, data):
-        """
+        """Abstract filter operation.
+
         If the API does not support filtering, the resource
         return True if the returned data matches the
         resource ID we are looking for.
@@ -112,6 +114,7 @@ class AWSResource(Resource):
 
     @property
     def data(self):
+        """Return data and load extra attributes if needed."""
         if not self._extra_attribute_loaded:
             if hasattr(self, "_load_extra_attribute"):
                 self._load_extra_attribute()
@@ -120,6 +123,7 @@ class AWSResource(Resource):
 
     @property
     def metrics(self):
+        """Return metrics."""
         if self._metrics is None:
             if self._cloudwatch:
                 data = self._cloudwatch.call(
@@ -133,7 +137,8 @@ class AWSResource(Resource):
 
     @property
     def tags(self):
-        """
+        """Return tags.
+
         Load and Convert the ugly Tags JSON into a real dictionary and
         memorize the result.
         """
@@ -164,6 +169,7 @@ class AWSResource(Resource):
         return self._tags
 
     def find_metric(self, metric_name):
+        """Return specified metric if exists."""
         for m in self.metrics:
             if m["MetricName"] == metric_name:
                 return m
@@ -185,10 +191,11 @@ class AWSResource(Resource):
         statistics=None,
         period=None,
     ):
-        """
-        Get metric data for this resource.  You can specify the time
-        frame for the data as either the number of days or number of
-        hours.  The maximum window is 14 days.  Based on the time frame
+        """Get metric data for this resource.
+
+        You can specify the time frame for the data as either the number
+        of days or number of hours.
+        The maximum window is 14 days.  Based on the time frame
         this method will calculate the correct ``period`` to return
         the maximum number of data points up to the CloudWatch max
         of 1440.
@@ -251,7 +258,7 @@ class AWSResource(Resource):
             raise ValueError("Metric (%s) not available" % metric_name)
 
     def _normalize_tags(self, tags):
-        """Convert the ugly Tags JSON into a real dictionary. """
+        """Convert the ugly Tags JSON into a real dictionary."""
         result = {}
         if isinstance(tags, list):
             for kvpair in tags:
@@ -271,6 +278,7 @@ class AWSResource(Resource):
 
     def _feed_from_spec(self, attr_spec):
         """Utilty to call boto3 on demand.
+
         Remove ResponseMetadata if needed.
         """
         method, path, param_name, param_value = attr_spec[:4]

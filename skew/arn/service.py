@@ -13,14 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from .component import ARNComponent, LOG
+"""Service module."""
 from skew.resources import all_services
-__all__ = ["Region"]
 
+from .component import LOG, ARNComponent
+
+__all__ = ["Service"]
 
 
 class Service(ARNComponent):
+    """Service definition."""
+
     def choices(self, context=None):
         if context:
             provider = context[1]
@@ -35,4 +38,3 @@ class Service(ARNComponent):
             for region in self._arn.region.enumerate(context, **kwargs):
                 yield region
             context.pop()
-

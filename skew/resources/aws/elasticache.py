@@ -16,16 +16,13 @@ from skew.resources.aws import AWSResource
 
 
 class Cluster(AWSResource):
-
     class Meta(object):
         service = 'elasticache'
         type = 'cluster'
-        enum_spec = ('describe_cache_clusters',
-                     'CacheClusters[]', None)
+        enum_spec = ('describe_cache_clusters', 'CacheClusters[]', None)
         detail_spec = None
         id = 'CacheClusterId'
-        tags_spec = ('list_tags_for_resource', 'TagList',
-                     'ResourceName', 'arn')
+        tags_spec = ('list_tags_for_resource', 'TagList', 'ResourceName', 'arn')
         filter_name = 'CacheClusterId'
         filter_type = 'scalar'
         name = 'CacheClusterId'
@@ -37,16 +34,17 @@ class Cluster(AWSResource):
         return 'arn:aws:%s:%s:%s:%s:%s' % (
             self._client.service_name,
             self._client.region_name,
-            self._client.account_id, self.resourcetype, self.id)
+            self._client.account_id,
+            self.resourcetype,
+            self.id,
+        )
 
 
 class SubnetGroup(AWSResource):
-
     class Meta(object):
         service = 'elasticache'
         type = 'subnet-group'
-        enum_spec = ('describe_cache_subnet_groups',
-                     'CacheSubnetGroups', None)
+        enum_spec = ('describe_cache_subnet_groups', 'CacheSubnetGroups', None)
         detail_spec = None
         id = 'CacheSubnetGroupName'
         filter_name = 'CacheSubnetGroupName'
@@ -57,15 +55,13 @@ class SubnetGroup(AWSResource):
 
 
 class Snapshot(AWSResource):
-
     class Meta(object):
         service = 'elasticache'
         type = 'snapshot'
         enum_spec = ('describe_snapshots', 'Snapshots', None)
         detail_spec = None
         id = 'SnapshotName'
-        tags_spec = ('list_tags_for_resource', 'TagList',
-                     'ResourceName', 'arn')
+        tags_spec = ('list_tags_for_resource', 'TagList', 'ResourceName', 'arn')
         filter_name = 'SnapshotName'
         filter_type = 'scalar'
         name = 'SnapshotName'
@@ -77,4 +73,7 @@ class Snapshot(AWSResource):
         return 'arn:aws:%s:%s:%s:%s:%s' % (
             self._client.service_name,
             self._client.region_name,
-            self._client.account_id, self.resourcetype, self.id)
+            self._client.account_id,
+            self.resourcetype,
+            self.id,
+        )

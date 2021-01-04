@@ -16,15 +16,12 @@ from skew.resources.aws import AWSResource
 
 
 class Route53Resource(AWSResource):
-
     @property
     def arn(self):
-        return 'arn:aws:%s:::%s/%s' % (
-            self._client.service_name, self.resourcetype, self.id)
+        return 'arn:aws:%s:::%s/%s' % (self._client.service_name, self.resourcetype, self.id)
 
 
 class HostedZone(Route53Resource):
-
     class Meta(object):
         service = 'route53'
         type = 'hostedzone'
@@ -35,8 +32,13 @@ class HostedZone(Route53Resource):
         name = 'Name'
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'ResourceTagSet.Tags[]',
-                     'ResourceId', 'id', {'ResourceType': 'hostedzone'})
+        tags_spec = (
+            'list_tags_for_resource',
+            'ResourceTagSet.Tags[]',
+            'ResourceId',
+            'id',
+            {'ResourceType': 'hostedzone'},
+        )
 
     @property
     def id(self):
@@ -44,7 +46,6 @@ class HostedZone(Route53Resource):
 
 
 class HealthCheck(Route53Resource):
-
     class Meta(object):
         service = 'route53'
         type = 'healthcheck'
@@ -55,12 +56,16 @@ class HealthCheck(Route53Resource):
         name = None
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'ResourceTagSet.Tags[]',
-                     'ResourceId', 'id', {'ResourceType': 'healthcheck'})
+        tags_spec = (
+            'list_tags_for_resource',
+            'ResourceTagSet.Tags[]',
+            'ResourceId',
+            'id',
+            {'ResourceType': 'healthcheck'},
+        )
 
 
 class ResourceRecordSet(Route53Resource):
-
     class Meta(object):
         service = 'route53'
         type = 'rrset'
