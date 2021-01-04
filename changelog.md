@@ -8,6 +8,8 @@
   - Update and separate dev dependencies from module dependencies
   - Align python syntax on version 3
   - Add few typing information
+  - Add poetry, isort, black, flake8
+  - Add sphinx documentation
 - Integrate Change from Christophe Morio (https://github.com/lbncmorio/skew/tree/more-resources)
 - Configuration:
   - Remove mandatory needs for skew.yaml (using iam metadata associated and default boto3 credentials initialization)

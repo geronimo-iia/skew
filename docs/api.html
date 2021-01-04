@@ -1,0 +1,1338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; skew 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Change log" href="changelog.html" />
+    <link rel="prev" title="skew" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> skew
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew">skew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew.arn">skew.arn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew.boto">skew.boto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew.awsclient">skew.awsclient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew.config">skew.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew.resources">skew.resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-skew.resources.aws">skew.resources.aws</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/geronimo-iia/skew">Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skew</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">API Reference</a><a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#api-reference" id="id2">API Reference</a></p>
+<ul>
+<li><p><a class="reference internal" href="#module-skew" id="id3">skew</a></p></li>
+<li><p><a class="reference internal" href="#module-skew.arn" id="id4">skew.arn</a></p></li>
+<li><p><a class="reference internal" href="#module-skew.boto" id="id5">skew.boto</a></p></li>
+<li><p><a class="reference internal" href="#module-skew.awsclient" id="id6">skew.awsclient</a></p></li>
+<li><p><a class="reference internal" href="#module-skew.config" id="id7">skew.config</a></p></li>
+<li><p><a class="reference internal" href="#module-skew.resources" id="id8">skew.resources</a></p></li>
+<li><p><a class="reference internal" href="#module-skew.resources.aws" id="id9">skew.resources.aws</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="module-skew">
+<span id="skew"></span><h2><a class="toc-backref" href="#id3">skew</a><a class="headerlink" href="#module-skew" title="Permalink to this headline">¶</a></h2>
+<p>skew module.</p>
+<p><strong>Miscellaneous:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.get_all_activated_regions" title="skew.get_all_activated_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_activated_regions</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Return a list of enabled region of caller account.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.get_caller_identity_account_id" title="skew.get_caller_identity_account_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_caller_identity_account_id</span></code></a>()</p></td>
+<td><p>Return aws identity of the caller.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.scan" title="skew.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan</span></code></a>(sku, **kwargs)</p></td>
+<td><p>Scan (i.e.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="skew.get_all_activated_regions">
+<code class="sig-prename descclassname">skew.</code><code class="sig-name descname">get_all_activated_regions</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/boto/utility.html#get_all_activated_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.get_all_activated_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of enabled region of caller account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of aws region</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.get_caller_identity_account_id">
+<code class="sig-prename descclassname">skew.</code><code class="sig-name descname">get_caller_identity_account_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/skew/boto/utility.html#get_caller_identity_account_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.get_caller_identity_account_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return aws identity of the caller.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.scan">
+<code class="sig-prename descclassname">skew.</code><code class="sig-name descname">scan</code><span class="sig-paren">(</span><em class="sig-param">sku</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew.html#scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.scan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan (i.e. look up) a SKU.</p>
+<p>The main interface into the skew library.  Pass in a SKU and we try
+to look it up and return the appropriate data.</p>
+<p>Each SKU scheme should be implemented as a class.  That class should
+have an attribute called <code class="docutils literal notranslate"><span class="pre">RegEx</span></code>.  The lookup method simply tries
+to match the SKU with the <code class="docutils literal notranslate"><span class="pre">RegEx</span></code> of the scheme.  If it matches,
+an instance of the class is created by passing in the <code class="docutils literal notranslate"><span class="pre">groupdict</span></code>
+of the regular expression to the constructor.  The scheme class
+should also implement the <code class="docutils literal notranslate"><span class="pre">iterator</span></code> protocol because people
+will want to iterate over the scheme object to get their results.</p>
+<p>We could use some sort of dynamic loading of scheme classes
+but since there is currently only one (ARN) let’s not over-complicate
+things.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-skew.arn">
+<span id="skew-arn"></span><h2><a class="toc-backref" href="#id4">skew.arn</a><a class="headerlink" href="#module-skew.arn" title="Permalink to this headline">¶</a></h2>
+<p>Define arn utilities.</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.arn.ARN" title="skew.arn.ARN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ARN</span></code></a>([arn_string])</p></td>
+<td><p>ARN definition.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="skew.arn.ARN">
+<em class="property">class </em><code class="sig-prename descclassname">skew.arn.</code><code class="sig-name descname">ARN</code><span class="sig-paren">(</span><em class="sig-param">arn_string='arn:aws:*:*:*:*'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/arn/arn.html#ARN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.arn.ARN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>ARN definition.</p>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.arn.ARN.ComponentClasses" title="skew.arn.ARN.ComponentClasses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComponentClasses</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.arn.ARN.account" title="skew.arn.ARN.account"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account</span></code></a></p></td>
+<td><p>Return account components.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.arn.ARN.provider" title="skew.arn.ARN.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
+<td><p>Return provider components.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.arn.ARN.region" title="skew.arn.ARN.region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region</span></code></a></p></td>
+<td><p>Return region components.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.arn.ARN.resource" title="skew.arn.ARN.resource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resource</span></code></a></p></td>
+<td><p>Return resource components.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.arn.ARN.scheme" title="skew.arn.ARN.scheme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scheme</span></code></a></p></td>
+<td><p>Return sheme components.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.arn.ARN.service" title="skew.arn.ARN.service"><code class="xref py py-obj docutils literal notranslate"><span class="pre">service</span></code></a></p></td>
+<td><p>Return service components.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.arn.ARN.debug" title="skew.arn.ARN.debug"><code class="xref py py-obj docutils literal notranslate"><span class="pre">debug</span></code></a>()</p></td>
+<td><p>Set debug mode on.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.arn.ARN.set_logger" title="skew.arn.ARN.set_logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_logger</span></code></a>(logger_name[, level])</p></td>
+<td><p>Initialize a logger.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="skew.arn.ARN.ComponentClasses">
+<code class="sig-name descname">ComponentClasses</code><em class="property"> = [&lt;class 'skew.arn.scheme.Scheme'&gt;, &lt;class 'skew.arn.provider.Provider'&gt;, &lt;class 'skew.arn.service.Service'&gt;, &lt;class 'skew.arn.region.Region'&gt;, &lt;class 'skew.arn.account.Account'&gt;, &lt;class 'skew.arn.resource.Resource'&gt;]</em><a class="headerlink" href="#skew.arn.ARN.ComponentClasses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.debug">
+<code class="sig-name descname">debug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/arn/arn.html#ARN.debug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.arn.ARN.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set debug mode on.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.set_logger">
+<code class="sig-name descname">set_logger</code><span class="sig-paren">(</span><em class="sig-param">logger_name</em>, <em class="sig-param">level=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/arn/arn.html#ARN.set_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.arn.ARN.set_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a logger.</p>
+<p>Convenience function to quickly configure full debug output
+to go to the console.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.scheme">
+<em class="property">property </em><code class="sig-name descname">scheme</code><a class="headerlink" href="#skew.arn.ARN.scheme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return sheme components.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.provider">
+<em class="property">property </em><code class="sig-name descname">provider</code><a class="headerlink" href="#skew.arn.ARN.provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return provider components.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.service">
+<em class="property">property </em><code class="sig-name descname">service</code><a class="headerlink" href="#skew.arn.ARN.service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return service components.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.region">
+<em class="property">property </em><code class="sig-name descname">region</code><a class="headerlink" href="#skew.arn.ARN.region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return region components.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.account">
+<em class="property">property </em><code class="sig-name descname">account</code><a class="headerlink" href="#skew.arn.ARN.account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return account components.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.arn.ARN.resource">
+<em class="property">property </em><code class="sig-name descname">resource</code><a class="headerlink" href="#skew.arn.ARN.resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return resource components.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-skew.boto">
+<span id="skew-boto"></span><h2><a class="toc-backref" href="#id5">skew.boto</a><a class="headerlink" href="#module-skew.boto" title="Permalink to this headline">¶</a></h2>
+<p>Boto3 utility.</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.AWSClient" title="skew.boto.AWSClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AWSClient</span></code></a>(service_name, account_id[, …])</p></td>
+<td><p>Manage AWS Client.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Miscellaneous:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.get_default_region" title="skew.boto.get_default_region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_default_region</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Get default AWS Region.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.boto.get_all_activated_regions" title="skew.boto.get_all_activated_regions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_activated_regions</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Return a list of enabled region of caller account.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.get_caller_identity_account_id" title="skew.boto.get_caller_identity_account_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_caller_identity_account_id</span></code></a>()</p></td>
+<td><p>Return aws identity of the caller.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.boto.get_default_session" title="skew.boto.get_default_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_default_session</span></code></a>()</p></td>
+<td><p>Return boto3 sessions on default aws region.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.get_session" title="skew.boto.get_session"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_session</span></code></a>([region_name, aws_creds, …])</p></td>
+<td><p>Return boto3 sesssion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.boto.get_client" title="skew.boto.get_client"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_client</span></code></a>(session, service_name[, …])</p></td>
+<td><p>Return a configured boto3 client.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="skew.boto.AWSClient">
+<em class="property">class </em><code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">AWSClient</code><span class="sig-paren">(</span><em class="sig-param">service_name: str</em>, <em class="sig-param">account_id: str</em>, <em class="sig-param">region_name: Optional[str] = None</em>, <em class="sig-param">aws_creds: Optional[Dict[str</em>, <em class="sig-param">str]] = None</em>, <em class="sig-param">profile_name: Optional[str] = None</em>, <em class="sig-param">placebo: Optional[Any] = None</em>, <em class="sig-param">placebo_data_path: Optional[str] = None</em>, <em class="sig-param">placebo_mode: Optional[str] = 'record'</em>, <em class="sig-param">max_attempts: int = 20</em>, <em class="sig-param">config: Optional[botocore.config.Config] = None</em>, <em class="sig-param">max_attempts_on_client_error: int = 10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/boto/client.html#AWSClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.AWSClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manage AWS Client.</p>
+<p>Build a new instance of AWSClient.</p>
+<p>By default, client is configured with an adaptive retries with 20 #attemps max.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>service_name</strong> (<em>str</em>) – aws service name</p></li>
+<li><p><strong>region_name</strong> (<em>str</em>) – aws region name</p></li>
+<li><p><strong>account_id</strong> (<em>str</em>) – aws account identifier</p></li>
+<li><p><strong>aws_creds</strong> – optional aws credentials</p></li>
+<li><p><strong>placebo</strong> – optional placebo instance</p></li>
+<li><p><strong>placebo_dir</strong> – optional placebo diectory</p></li>
+<li><p><strong>placebo_mode</strong> – optional placebo mode (default “record”)</p></li>
+<li><p><strong>max_attempts</strong> (<em>int</em>) – optional retry max attemps (default 20)</p></li>
+<li><p><strong>config</strong> (<em>Optional</em><em>[</em><em>Config</em><em>]</em>) – optional boto3 Config instance (overide max_attempts parameter)</p></li>
+<li><p><strong>max_attempts_on_client_error</strong> (<em>int</em>) – optional limit of retry on client error (default 10)</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.AWSClient.account_id" title="skew.boto.AWSClient.account_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account_id</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.boto.AWSClient.region_name" title="skew.boto.AWSClient.region_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region_name</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.AWSClient.service_name" title="skew.boto.AWSClient.service_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">service_name</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.boto.AWSClient.call" title="skew.boto.AWSClient.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a>(op_name[, query])</p></td>
+<td><p>Make a request to a method in this client.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="skew.boto.AWSClient.service_name">
+<em class="property">property </em><code class="sig-name descname">service_name</code><a class="headerlink" href="#skew.boto.AWSClient.service_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.boto.AWSClient.region_name">
+<em class="property">property </em><code class="sig-name descname">region_name</code><a class="headerlink" href="#skew.boto.AWSClient.region_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.boto.AWSClient.account_id">
+<em class="property">property </em><code class="sig-name descname">account_id</code><a class="headerlink" href="#skew.boto.AWSClient.account_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.boto.AWSClient.call">
+<code class="sig-name descname">call</code><span class="sig-paren">(</span><em class="sig-param">op_name</em>, <em class="sig-param">query=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/boto/client.html#AWSClient.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.AWSClient.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a request to a method in this client.</p>
+<p>The response data is returned from this call as native Python data structures.</p>
+<p>This method differs from just calling the client method directly
+in the following ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It automatically handles the pagination rather than
+relying on a separate pagination method call.</p></li>
+<li><p>You can pass an optional jmespath query and this query
+will be applied to the data returned from the low-level
+call.  This allows you to tailor the returned data to be
+exactly what you want.</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_name</strong> (<em>str</em>) – The name of the request you wish to make.</p></li>
+<li><p><strong>query</strong> (<em>str</em>) – A jmespath query that will be applied to the
+data returned by the operation prior to returning
+it to the user.</p></li>
+<li><p><strong>kwargs</strong> (<em>keyword arguments</em>) – Additional keyword arguments you want to pass
+to the method when making the request.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.boto.get_all_activated_regions">
+<code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">get_all_activated_regions</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/boto/utility.html#get_all_activated_regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.get_all_activated_regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of enabled region of caller account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of aws region</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.boto.get_caller_identity_account_id">
+<code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">get_caller_identity_account_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/skew/boto/utility.html#get_caller_identity_account_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.get_caller_identity_account_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return aws identity of the caller.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.boto.get_client">
+<code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">get_client</code><span class="sig-paren">(</span><em class="sig-param">session: boto3.session.Session</em>, <em class="sig-param">service_name: str</em>, <em class="sig-param">region_name: Optional[str] = None</em>, <em class="sig-param">max_attempts: int = 20</em>, <em class="sig-param">config: Optional[botocore.config.Config] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/boto/utility.html#get_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.get_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a configured boto3 client.</p>
+<p>By default, client is configured with an adaptive retries with 20 #attemps max.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> (<em>boto3.Session</em>) – boto3 session</p></li>
+<li><p><strong>service_name</strong> (<em>str</em>) – service name</p></li>
+<li><p><strong>region_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – optional aws region name</p></li>
+<li><p><strong>max_attempts</strong> (<em>int</em>) – optional retry max attemps (default 20)</p></li>
+<li><p><strong>config</strong> (<em>Optional</em><em>[</em><em>Config</em><em>]</em>) – optional boto3 Config instance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.boto.get_default_region">
+<code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">get_default_region</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/boto/utility.html#get_default_region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.get_default_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default AWS Region.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>aws default region name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.boto.get_default_session">
+<code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">get_default_session</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; boto3.session.Session<a class="reference internal" href="_modules/skew/boto/utility.html#get_default_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.get_default_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return boto3 sessions on default aws region.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.boto.get_session">
+<code class="sig-prename descclassname">skew.boto.</code><code class="sig-name descname">get_session</code><span class="sig-paren">(</span><em class="sig-param">region_name: Optional[str] = None</em>, <em class="sig-param">aws_creds: Optional[Dict[str</em>, <em class="sig-param">str]] = None</em>, <em class="sig-param">profile_name: Optional[str] = None</em>, <em class="sig-param">placebo: Optional[Any] = None</em>, <em class="sig-param">placebo_data_path: Optional[str] = None</em>, <em class="sig-param">placebo_mode: Optional[str] = 'record'</em><span class="sig-paren">)</span> &#x2192; boto3.session.Session<a class="reference internal" href="_modules/skew/boto/utility.html#get_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.boto.get_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return boto3 sesssion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – optional region name</p></li>
+<li><p><strong>aws_creds</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – optional dict of aws key, aws secret key</p></li>
+<li><p><strong>profile_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – optional profile name</p></li>
+<li><p><strong>placebo</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – optional placebo object</p></li>
+<li><p><strong>placebo_data_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – optional placebo data path</p></li>
+<li><p><strong>Optional</strong><strong>[</strong><strong>str</strong><strong>]</strong> (<em>placebo_mode</em>) – optional placebo mode (default ‘record’)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-skew.awsclient">
+<span id="skew-awsclient"></span><h2><a class="toc-backref" href="#id6">skew.awsclient</a><a class="headerlink" href="#module-skew.awsclient" title="Permalink to this headline">¶</a></h2>
+<p>aws client module.</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.awsclient.get_awsclient" title="skew.awsclient.get_awsclient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_awsclient</span></code></a>(service_name, account_id[, …])</p></td>
+<td><p>Return a configured aws client.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="skew.awsclient.get_awsclient">
+<code class="sig-prename descclassname">skew.awsclient.</code><code class="sig-name descname">get_awsclient</code><span class="sig-paren">(</span><em class="sig-param">service_name: str</em>, <em class="sig-param">account_id: str</em>, <em class="sig-param">region_name: Optional[str] = None</em>, <em class="sig-param">aws_creds: Optional[Dict[str</em>, <em class="sig-param">str]] = None</em>, <em class="sig-param">profile_name: Optional[str] = None</em>, <em class="sig-param">placebo: Optional[Any] = None</em>, <em class="sig-param">placebo_data_path: Optional[str] = None</em>, <em class="sig-param">placebo_mode: Optional[str] = 'record'</em>, <em class="sig-param">max_attempts: int = 20</em>, <em class="sig-param">config: Optional[botocore.config.Config] = None</em>, <em class="sig-param">max_attempts_on_client_error: int = 10</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/awsclient.html#get_awsclient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.awsclient.get_awsclient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a configured aws client.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-skew.config">
+<span id="skew-config"></span><h2><a class="toc-backref" href="#id7">skew.config</a><a class="headerlink" href="#module-skew.config" title="Permalink to this headline">¶</a></h2>
+<p>config module.</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.config.get_config" title="skew.config.get_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config</span></code></a>()</p></td>
+<td><p>Return skew configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.config.get_credentials" title="skew.config.get_credentials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_credentials</span></code></a>(account_id)</p></td>
+<td><p>Return skew configuration account credentials.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.config.get_profile" title="skew.config.get_profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_profile</span></code></a>(account_id)</p></td>
+<td><p>Return skew configuration account profile.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.config.get_accounts" title="skew.config.get_accounts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_accounts</span></code></a>()</p></td>
+<td><p>Return skew configuration accounts.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="skew.config.get_config">
+<code class="sig-prename descclassname">skew.config.</code><code class="sig-name descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/config.html#get_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.config.get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return skew configuration.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.config.get_accounts">
+<code class="sig-prename descclassname">skew.config.</code><code class="sig-name descname">get_accounts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/config.html#get_accounts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.config.get_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return skew configuration accounts.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.config.get_credentials">
+<code class="sig-prename descclassname">skew.config.</code><code class="sig-name descname">get_credentials</code><span class="sig-paren">(</span><em class="sig-param">account_id: str</em><span class="sig-paren">)</span> &#x2192; Optional[Dict[str, str]]<a class="reference internal" href="_modules/skew/config.html#get_credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.config.get_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return skew configuration account credentials.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.config.get_profile">
+<code class="sig-prename descclassname">skew.config.</code><code class="sig-name descname">get_profile</code><span class="sig-paren">(</span><em class="sig-param">account_id: str</em><span class="sig-paren">)</span> &#x2192; Optional[str]<a class="reference internal" href="_modules/skew/config.html#get_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.config.get_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return skew configuration account profile.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-skew.resources">
+<span id="skew-resources"></span><h2><a class="toc-backref" href="#id8">skew.resources</a><a class="headerlink" href="#module-skew.resources" title="Permalink to this headline">¶</a></h2>
+<p>resources module.</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.all_providers" title="skew.resources.all_providers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_providers</span></code></a>()</p></td>
+<td><p>Return all providers defined in resource types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.all_services" title="skew.resources.all_services"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_services</span></code></a>(provider_name)</p></td>
+<td><p>Return all services defined in resource types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.all_types" title="skew.resources.all_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_types</span></code></a>(provider_name, service_name)</p></td>
+<td><p>Return all types defined in resource types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.find_resource_class" title="skew.resources.find_resource_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_resource_class</span></code></a>(resource_path)</p></td>
+<td><p>Dynamically load a class from a string.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="skew.resources.all_providers">
+<code class="sig-prename descclassname">skew.resources.</code><code class="sig-name descname">all_providers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/definition.html#all_providers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.all_providers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all providers defined in resource types.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.resources.all_services">
+<code class="sig-prename descclassname">skew.resources.</code><code class="sig-name descname">all_services</code><span class="sig-paren">(</span><em class="sig-param">provider_name: str</em><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="_modules/skew/resources/definition.html#all_services"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.all_services" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all services defined in resource types.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.resources.all_types">
+<code class="sig-prename descclassname">skew.resources.</code><code class="sig-name descname">all_types</code><span class="sig-paren">(</span><em class="sig-param">provider_name: str</em>, <em class="sig-param">service_name: str</em><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="_modules/skew/resources/definition.html#all_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.all_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all types defined in resource types.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.resources.find_resource_class">
+<code class="sig-prename descclassname">skew.resources.</code><code class="sig-name descname">find_resource_class</code><span class="sig-paren">(</span><em class="sig-param">resource_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/definition.html#find_resource_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.find_resource_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamically load a class from a string.</p>
+</dd></dl>
+
+<span class="target" id="module-skew.resources.resource"></span><p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource" title="skew.resources.resource.Resource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Resource</span></code></a>(client, data[, query])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="skew.resources.resource.Resource">
+<em class="property">class </em><code class="sig-prename descclassname">skew.resources.resource.</code><code class="sig-name descname">Resource</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">data</em>, <em class="sig-param">query=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/resource.html#Resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.resource.Resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta" title="skew.resources.resource.Resource.Meta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Meta</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.arn" title="skew.resources.resource.Resource.arn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arn</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.data" title="skew.resources.resource.Resource.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.date" title="skew.resources.resource.Resource.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.id" title="skew.resources.resource.Resource.id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.metric_names" title="skew.resources.resource.Resource.metric_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metric_names</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.metrics" title="skew.resources.resource.Resource.metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metrics</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.name" title="skew.resources.resource.Resource.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.parent" title="skew.resources.resource.Resource.parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.resourcetype" title="skew.resources.resource.Resource.resourcetype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resourcetype</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.tags" title="skew.resources.resource.Resource.tags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tags</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.enumerate" title="skew.resources.resource.Resource.enumerate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enumerate</span></code></a>(arn, region, account[, resource_id])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.find_metric" title="skew.resources.resource.Resource.find_metric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_metric</span></code></a>(metric_name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.get_awsclient" title="skew.resources.resource.Resource.get_awsclient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_awsclient</span></code></a>(region_name, account_id, **kwargs)</p></td>
+<td><p>Get aws client and merge parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.json_dump" title="skew.resources.resource.Resource.json_dump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_dump</span></code></a>([normalize])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="skew.resources.resource.Resource.get_awsclient">
+<em class="property">classmethod </em><code class="sig-name descname">get_awsclient</code><span class="sig-paren">(</span><em class="sig-param">region_name</em>, <em class="sig-param">account_id</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/resource.html#Resource.get_awsclient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.resource.Resource.get_awsclient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get aws client and merge parameters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.enumerate">
+<em class="property">classmethod </em><code class="sig-name descname">enumerate</code><span class="sig-paren">(</span><em class="sig-param">arn</em>, <em class="sig-param">region</em>, <em class="sig-param">account</em>, <em class="sig-param">resource_id=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/resource.html#Resource.enumerate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.resource.Resource.enumerate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="skew.resources.resource.Resource.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="reference internal" href="_modules/skew/resources/resource.html#Resource.Meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.resource.Resource.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta.date" title="skew.resources.resource.Resource.Meta.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta.dimension" title="skew.resources.resource.Resource.Meta.dimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dimension</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta.id" title="skew.resources.resource.Resource.Meta.id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta.name" title="skew.resources.resource.Resource.Meta.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta.tags_spec" title="skew.resources.resource.Resource.Meta.tags_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tags_spec</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.resource.Resource.Meta.type" title="skew.resources.resource.Resource.Meta.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="skew.resources.resource.Resource.Meta.type">
+<code class="sig-name descname">type</code><em class="property"> = 'resource'</em><a class="headerlink" href="#skew.resources.resource.Resource.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.resource.Resource.Meta.dimension">
+<code class="sig-name descname">dimension</code><em class="property"> = None</em><a class="headerlink" href="#skew.resources.resource.Resource.Meta.dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.resource.Resource.Meta.tags_spec">
+<code class="sig-name descname">tags_spec</code><em class="property"> = None</em><a class="headerlink" href="#skew.resources.resource.Resource.Meta.tags_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.resource.Resource.Meta.id">
+<code class="sig-name descname">id</code><em class="property"> = None</em><a class="headerlink" href="#skew.resources.resource.Resource.Meta.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.resource.Resource.Meta.date">
+<code class="sig-name descname">date</code><em class="property"> = None</em><a class="headerlink" href="#skew.resources.resource.Resource.Meta.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.resource.Resource.Meta.name">
+<code class="sig-name descname">name</code><em class="property"> = None</em><a class="headerlink" href="#skew.resources.resource.Resource.Meta.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.arn">
+<em class="property">property </em><code class="sig-name descname">arn</code><a class="headerlink" href="#skew.resources.resource.Resource.arn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#skew.resources.resource.Resource.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.resourcetype">
+<em class="property">property </em><code class="sig-name descname">resourcetype</code><a class="headerlink" href="#skew.resources.resource.Resource.resourcetype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.parent">
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#skew.resources.resource.Resource.parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#skew.resources.resource.Resource.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#skew.resources.resource.Resource.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.date">
+<em class="property">property </em><code class="sig-name descname">date</code><a class="headerlink" href="#skew.resources.resource.Resource.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.tags">
+<em class="property">property </em><code class="sig-name descname">tags</code><a class="headerlink" href="#skew.resources.resource.Resource.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.metrics">
+<em class="property">property </em><code class="sig-name descname">metrics</code><a class="headerlink" href="#skew.resources.resource.Resource.metrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.metric_names">
+<em class="property">property </em><code class="sig-name descname">metric_names</code><a class="headerlink" href="#skew.resources.resource.Resource.metric_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.find_metric">
+<code class="sig-name descname">find_metric</code><span class="sig-paren">(</span><em class="sig-param">metric_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/resource.html#Resource.find_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.resource.Resource.find_metric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.resource.Resource.json_dump">
+<code class="sig-name descname">json_dump</code><span class="sig-paren">(</span><em class="sig-param">normalize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/resource.html#Resource.json_dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.resource.Resource.json_dump" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-skew.resources.json_dump"></span><p>Json utilities.</p>
+<p><strong>Functions:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.json_dump.json_dump" title="skew.resources.json_dump.json_dump"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_dump</span></code></a>(data[, normalize])</p></td>
+<td><p>Dump a dictionnary as json.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.json_dump.custom_json_encoder" title="skew.resources.json_dump.custom_json_encoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">custom_json_encoder</span></code></a>(x)</p></td>
+<td><p>JSON encoder that formats datetimes as ISO8601 format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.json_dump.camel_to_snake" title="skew.resources.json_dump.camel_to_snake"><code class="xref py py-obj docutils literal notranslate"><span class="pre">camel_to_snake</span></code></a>(name)</p></td>
+<td><p>Convert camel case string to snake case.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="skew.resources.json_dump.custom_json_encoder">
+<code class="sig-prename descclassname">skew.resources.json_dump.</code><code class="sig-name descname">custom_json_encoder</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/json_dump.html#custom_json_encoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.json_dump.custom_json_encoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>JSON encoder that formats datetimes as ISO8601 format.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.resources.json_dump.json_dump">
+<code class="sig-prename descclassname">skew.resources.json_dump.</code><code class="sig-name descname">json_dump</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">normalize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/json_dump.html#json_dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.json_dump.json_dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump a dictionnary as json.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skew.resources.json_dump.camel_to_snake">
+<code class="sig-prename descclassname">skew.resources.json_dump.</code><code class="sig-name descname">camel_to_snake</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/skew/resources/json_dump.html#camel_to_snake"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.json_dump.camel_to_snake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert camel case string to snake case.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-skew.resources.aws">
+<span id="skew-resources-aws"></span><h2><a class="toc-backref" href="#id9">skew.resources.aws</a><a class="headerlink" href="#module-skew.resources.aws" title="Permalink to this headline">¶</a></h2>
+<p>aws module.</p>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents" title="skew.resources.aws.ArnComponents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArnComponents</span></code></a>(scheme, provider, service, …)</p></td>
+<td><p>Create new instance of ArnComponents(scheme, provider, service, region, account, resource)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.aws.MetricData" title="skew.resources.aws.MetricData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MetricData</span></code></a>(data, period)</p></td>
+<td><p>MetricData Definition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource" title="skew.resources.aws.AWSResource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AWSResource</span></code></a>(client, data[, query])</p></td>
+<td><p>Base class for all AWS resource definition.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="skew.resources.aws.MetricData">
+<em class="property">class </em><code class="sig-prename descclassname">skew.resources.aws.</code><code class="sig-name descname">MetricData</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">period</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/aws.html#MetricData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.aws.MetricData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>MetricData Definition.</p>
+<p>This is a simple object that allows us to compose both the returned
+data from a call to <code class="docutils literal notranslate"><span class="pre">get_metrics_data</span></code> as well as the period that
+was used when getting the data from CloudWatch.  Since the period
+may be calculated by <code class="docutils literal notranslate"><span class="pre">get_metrics_data</span></code> rather than passed explicitly
+the user would otherwise not how what the period value was.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="skew.resources.aws.AWSResource">
+<em class="property">class </em><code class="sig-prename descclassname">skew.resources.aws.</code><code class="sig-name descname">AWSResource</code><span class="sig-paren">(</span><em class="sig-param">client</em>, <em class="sig-param">data</em>, <em class="sig-param">query=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/aws.html#AWSResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.aws.AWSResource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#skew.resources.resource.Resource" title="skew.resources.resource.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">skew.resources.resource.Resource</span></code></a></p>
+<p>Base class for all AWS resource definition.</p>
+<p>Each Resource class defines a Config variable at the class level.  This
+is a dictionary that gives the specifics about which service the resource
+belongs to and how to enumerate the resource.</p>
+<p>Each entry in the dictionary we define:</p>
+<ul>
+<li><p>service - The AWS service in which this resource is defined.</p></li>
+<li><p>enum_spec - The enumeration configuration.  This is a tuple consisting
+of the name of the operation to call to enumerate the resources,
+a jmespath query that will be run against the result of the operation
+to retrieve the list of resources, and a dictionary containing any
+extra arguments you want to pass in the enumeration call.  This
+can be None if no additional arguments are required.</p></li>
+<li><p>tags_spec - Some AWS resources return the tags for the resource in
+the enumeration operation (e.g. DescribeInstances) while others
+require a second operation to retrieve the tags.  If a second
+operation is required the <code class="docutils literal notranslate"><span class="pre">tags_spec</span></code> describes how to make the
+call.  It is a tuple consisting of:
+* operation name
+* jmespath query to find the tags in the response
+* the name of the parameter to send to identify the specific resource</p>
+<blockquote>
+<div><p>(this is not always the same as filter_name, e.g. RDS)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>the value of the parameter to send to identify the specific resource
+(this is not always the same as the id, e.g. RDS)</p></li>
+<li><p>[OPTIONAL] the fifth parameter is a dict containing the constants
+needed to the call of the operation, in addition to the parameter
+used to identify the specific resource (e.g. needed for Route53).
+Those constants are expressed in a dict of key, value pairs.</p></li>
+</ul>
+</li>
+<li><p>detail_spec - Some services provide only summary information in the
+list or describe method and require you to make another request to get
+the detailed info for a specific resource.  If that is the case, this
+would contain a tuple consisting of the operation to call for the
+details, the parameter name to pass in to identify the desired
+resource and the jmespath filter to apply to the results to get
+the details.</p></li>
+<li><p>id - The name of the field within the resource data that uniquely
+identifies the resource.</p></li>
+<li><p>dimension - The CloudWatch dimension for this resource.  A value
+of None indicates that this resource is not monitored by CloudWatch.</p></li>
+<li><p>filter_name - By default, the enumerator returns all resources of a
+given type.  But you can also tell it to filter the results by
+passing in a list of id’s.  This parameter tells it the name of the
+parameter to use to specify this list of id’s.</p></li>
+</ul>
+<p><strong>Classes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.Meta" title="skew.resources.aws.AWSResource.Meta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Meta</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.data" title="skew.resources.aws.AWSResource.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p>Return data and load extra attributes if needed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.metrics" title="skew.resources.aws.AWSResource.metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metrics</span></code></a></p></td>
+<td><p>Return metrics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.tags" title="skew.resources.aws.AWSResource.tags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tags</span></code></a></p></td>
+<td><p>Return tags.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.filter" title="skew.resources.aws.AWSResource.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(arn, resource_id, data)</p></td>
+<td><p>Abstract filter operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.find_metric" title="skew.resources.aws.AWSResource.find_metric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_metric</span></code></a>(metric_name)</p></td>
+<td><p>Return specified metric if exists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.get_metric_data" title="skew.resources.aws.AWSResource.get_metric_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metric_data</span></code></a>([metric_name, metric, days, …])</p></td>
+<td><p>Get metric data for this resource.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="skew.resources.aws.AWSResource.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="reference internal" href="_modules/skew/resources/aws.html#AWSResource.Meta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.aws.AWSResource.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.AWSResource.Meta.type" title="skew.resources.aws.AWSResource.Meta.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="skew.resources.aws.AWSResource.Meta.type">
+<code class="sig-name descname">type</code><em class="property"> = 'awsresource'</em><a class="headerlink" href="#skew.resources.aws.AWSResource.Meta.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.aws.AWSResource.filter">
+<em class="property">classmethod </em><code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">arn</em>, <em class="sig-param">resource_id</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/aws.html#AWSResource.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.aws.AWSResource.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract filter operation.</p>
+<p>If the API does not support filtering, the resource
+return True if the returned data matches the
+resource ID we are looking for.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.aws.AWSResource.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#skew.resources.aws.AWSResource.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data and load extra attributes if needed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.aws.AWSResource.metrics">
+<em class="property">property </em><code class="sig-name descname">metrics</code><a class="headerlink" href="#skew.resources.aws.AWSResource.metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return metrics.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.aws.AWSResource.tags">
+<em class="property">property </em><code class="sig-name descname">tags</code><a class="headerlink" href="#skew.resources.aws.AWSResource.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tags.</p>
+<p>Load and Convert the ugly Tags JSON into a real dictionary and
+memorize the result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.aws.AWSResource.find_metric">
+<code class="sig-name descname">find_metric</code><span class="sig-paren">(</span><em class="sig-param">metric_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/aws.html#AWSResource.find_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.aws.AWSResource.find_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return specified metric if exists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skew.resources.aws.AWSResource.get_metric_data">
+<code class="sig-name descname">get_metric_data</code><span class="sig-paren">(</span><em class="sig-param">metric_name=None</em>, <em class="sig-param">metric=None</em>, <em class="sig-param">days=None</em>, <em class="sig-param">hours=1</em>, <em class="sig-param">minutes=None</em>, <em class="sig-param">statistics=None</em>, <em class="sig-param">period=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/skew/resources/aws.html#AWSResource.get_metric_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skew.resources.aws.AWSResource.get_metric_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get metric data for this resource.</p>
+<p>You can specify the time frame for the data as either the number
+of days or number of hours.
+The maximum window is 14 days.  Based on the time frame
+this method will calculate the correct <code class="docutils literal notranslate"><span class="pre">period</span></code> to return
+the maximum number of data points up to the CloudWatch max
+of 1440.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_name</strong> (<em>str</em>) – The name of the metric this data will
+pertain to.</p></li>
+<li><p><strong>days</strong> (<em>int</em>) – The number of days worth of data to return.
+You can specify either <code class="docutils literal notranslate"><span class="pre">days</span></code> or <code class="docutils literal notranslate"><span class="pre">hours</span></code>.  The default
+is one hour.  The maximum value is 14 days.</p></li>
+<li><p><strong>hours</strong> (<em>int</em>) – The number of hours worth of data to return.
+You can specify either <code class="docutils literal notranslate"><span class="pre">days</span></code> or <code class="docutils literal notranslate"><span class="pre">hours</span></code>.  The default
+is one hour.  The maximum value is 14 days.</p></li>
+<li><p><strong>statistics</strong> (<em>list of str</em>) – <p>The metric statistics to return.  The default
+value is <strong>Average</strong>.  Possible values are:</p>
+<ul>
+<li><p>Average</p></li>
+<li><p>Sum</p></li>
+<li><p>SampleCount</p></li>
+<li><p>Maximum</p></li>
+<li><p>Minimum</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="docutils literal notranslate"><span class="pre">MetricData</span></code> object that contains both the CloudWatch
+data as well as the <code class="docutils literal notranslate"><span class="pre">period</span></code> used since this value may have
+been calculated by skew.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="skew.resources.aws.ArnComponents">
+<em class="property">class </em><code class="sig-prename descclassname">skew.resources.aws.</code><code class="sig-name descname">ArnComponents</code><span class="sig-paren">(</span><em class="sig-param">scheme</em>, <em class="sig-param">provider</em>, <em class="sig-param">service</em>, <em class="sig-param">region</em>, <em class="sig-param">account</em>, <em class="sig-param">resource</em><span class="sig-paren">)</span><a class="headerlink" href="#skew.resources.aws.ArnComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Create new instance of ArnComponents(scheme, provider, service, region, account, resource)</p>
+<p><strong>Attributes:</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents.account" title="skew.resources.aws.ArnComponents.account"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account</span></code></a></p></td>
+<td><p>Alias for field number 4</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents.provider" title="skew.resources.aws.ArnComponents.provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">provider</span></code></a></p></td>
+<td><p>Alias for field number 1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents.region" title="skew.resources.aws.ArnComponents.region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region</span></code></a></p></td>
+<td><p>Alias for field number 3</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents.resource" title="skew.resources.aws.ArnComponents.resource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resource</span></code></a></p></td>
+<td><p>Alias for field number 5</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents.scheme" title="skew.resources.aws.ArnComponents.scheme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scheme</span></code></a></p></td>
+<td><p>Alias for field number 0</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skew.resources.aws.ArnComponents.service" title="skew.resources.aws.ArnComponents.service"><code class="xref py py-obj docutils literal notranslate"><span class="pre">service</span></code></a></p></td>
+<td><p>Alias for field number 2</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="skew.resources.aws.ArnComponents.account">
+<code class="sig-name descname">account</code><a class="headerlink" href="#skew.resources.aws.ArnComponents.account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.aws.ArnComponents.provider">
+<code class="sig-name descname">provider</code><a class="headerlink" href="#skew.resources.aws.ArnComponents.provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.aws.ArnComponents.region">
+<code class="sig-name descname">region</code><a class="headerlink" href="#skew.resources.aws.ArnComponents.region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.aws.ArnComponents.resource">
+<code class="sig-name descname">resource</code><a class="headerlink" href="#skew.resources.aws.ArnComponents.resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.aws.ArnComponents.scheme">
+<code class="sig-name descname">scheme</code><a class="headerlink" href="#skew.resources.aws.ArnComponents.scheme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skew.resources.aws.ArnComponents.service">
+<code class="sig-name descname">service</code><a class="headerlink" href="#skew.resources.aws.ArnComponents.service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Change log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="skew" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jerome Guibert
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>skew.resources.aws &mdash; skew 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> skew
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/geronimo-iia/skew">Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">skew</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../skew.html">skew</a> &raquo;</li>
+        
+      <li>skew.resources.aws</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for skew.resources.aws</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2014 Scopely, Inc.</span>
+<span class="c1"># Copyright (c) 2015 Mitch Garnaat</span>
+<span class="c1"># Copyright (c) 2020 Jerome Guibert</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You</span>
+<span class="c1"># may not use this file except in compliance with the License. A copy of</span>
+<span class="c1"># the License is located at</span>
+<span class="c1">#</span>
+<span class="c1"># http://aws.amazon.com/apache2.0/</span>
+<span class="c1">#</span>
+<span class="c1"># or in the &quot;license&quot; file accompanying this file. This file is</span>
+<span class="c1"># distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF</span>
+<span class="c1"># ANY KIND, either express or implied. See the License for the specific</span>
+<span class="c1"># language governing permissions and limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;aws module.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="kn">import</span> <span class="nn">jmespath</span>
+
+<span class="kn">from</span> <span class="nn">skew.resources.resource</span> <span class="kn">import</span> <span class="n">Resource</span>
+
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ArnComponents&quot;</span><span class="p">,</span> <span class="s2">&quot;MetricData&quot;</span><span class="p">,</span> <span class="s2">&quot;AWSResource&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="MetricData"><a class="viewcode-back" href="../../../api.html#skew.resources.aws.MetricData">[docs]</a><span class="k">class</span> <span class="nc">MetricData</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MetricData Definition.</span>
+
+<span class="sd">    This is a simple object that allows us to compose both the returned</span>
+<span class="sd">    data from a call to ``get_metrics_data`` as well as the period that</span>
+<span class="sd">    was used when getting the data from CloudWatch.  Since the period</span>
+<span class="sd">    may be calculated by ``get_metrics_data`` rather than passed explicitly</span>
+<span class="sd">    the user would otherwise not how what the period value was.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span></div>
+
+
+<div class="viewcode-block" id="AWSResource"><a class="viewcode-back" href="../../../api.html#skew.resources.aws.AWSResource">[docs]</a><span class="k">class</span> <span class="nc">AWSResource</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all AWS resource definition.</span>
+
+<span class="sd">    Each Resource class defines a Config variable at the class level.  This</span>
+<span class="sd">    is a dictionary that gives the specifics about which service the resource</span>
+<span class="sd">    belongs to and how to enumerate the resource.</span>
+
+<span class="sd">    Each entry in the dictionary we define:</span>
+
+<span class="sd">    * service - The AWS service in which this resource is defined.</span>
+<span class="sd">    * enum_spec - The enumeration configuration.  This is a tuple consisting</span>
+<span class="sd">      of the name of the operation to call to enumerate the resources,</span>
+<span class="sd">      a jmespath query that will be run against the result of the operation</span>
+<span class="sd">      to retrieve the list of resources, and a dictionary containing any</span>
+<span class="sd">      extra arguments you want to pass in the enumeration call.  This</span>
+<span class="sd">      can be None if no additional arguments are required.</span>
+<span class="sd">    * tags_spec - Some AWS resources return the tags for the resource in</span>
+<span class="sd">      the enumeration operation (e.g. DescribeInstances) while others</span>
+<span class="sd">      require a second operation to retrieve the tags.  If a second</span>
+<span class="sd">      operation is required the ``tags_spec`` describes how to make the</span>
+<span class="sd">      call.  It is a tuple consisting of:</span>
+<span class="sd">      * operation name</span>
+<span class="sd">      * jmespath query to find the tags in the response</span>
+<span class="sd">      * the name of the parameter to send to identify the specific resource</span>
+<span class="sd">        (this is not always the same as filter_name, e.g. RDS)</span>
+<span class="sd">      * the value of the parameter to send to identify the specific resource</span>
+<span class="sd">        (this is not always the same as the id, e.g. RDS)</span>
+<span class="sd">      * [OPTIONAL] the fifth parameter is a dict containing the constants</span>
+<span class="sd">        needed to the call of the operation, in addition to the parameter</span>
+<span class="sd">        used to identify the specific resource (e.g. needed for Route53).</span>
+<span class="sd">        Those constants are expressed in a dict of key, value pairs.</span>
+<span class="sd">    * detail_spec - Some services provide only summary information in the</span>
+<span class="sd">      list or describe method and require you to make another request to get</span>
+<span class="sd">      the detailed info for a specific resource.  If that is the case, this</span>
+<span class="sd">      would contain a tuple consisting of the operation to call for the</span>
+<span class="sd">      details, the parameter name to pass in to identify the desired</span>
+<span class="sd">      resource and the jmespath filter to apply to the results to get</span>
+<span class="sd">      the details.</span>
+<span class="sd">    * id - The name of the field within the resource data that uniquely</span>
+<span class="sd">      identifies the resource.</span>
+<span class="sd">    * dimension - The CloudWatch dimension for this resource.  A value</span>
+<span class="sd">      of None indicates that this resource is not monitored by CloudWatch.</span>
+<span class="sd">    * filter_name - By default, the enumerator returns all resources of a</span>
+<span class="sd">      given type.  But you can also tell it to filter the results by</span>
+<span class="sd">      passing in a list of id&#39;s.  This parameter tells it the name of the</span>
+<span class="sd">      parameter to use to specify this list of id&#39;s.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AWSResource.Meta"><a class="viewcode-back" href="../../../api.html#skew.resources.aws.AWSResource.Meta">[docs]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;awsresource&quot;</span></div>
+
+<div class="viewcode-block" id="AWSResource.filter"><a class="viewcode-back" href="../../../api.html#skew.resources.aws.AWSResource.filter">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arn</span><span class="p">,</span> <span class="n">resource_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Abstract filter operation.</span>
+
+<span class="sd">        If the API does not support filtering, the resource</span>
+<span class="sd">        return True if the returned data matches the</span>
+<span class="sd">        resource ID we are looking for.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;filter classmethod must be implemented for </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AWSResource</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">client</span><span class="o">=</span><span class="n">client</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extra_attribute_loaded</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arn</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return data and load extra attributes if needed.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_attribute_loaded</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_load_extra_attribute&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_load_extra_attribute</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_extra_attribute_loaded</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AWSResource</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return metrics.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cloudwatch</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cloudwatch</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                    <span class="s2">&quot;list_metrics&quot;</span><span class="p">,</span>
+                    <span class="n">Dimensions</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">dimension</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">}],</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span> <span class="o">=</span> <span class="n">jmespath</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Metrics&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metrics</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return tags.</span>
+
+<span class="sd">        Load and Convert the ugly Tags JSON into a real dictionary and</span>
+<span class="sd">        memorize the result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;need to build tags&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tags</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">&quot;tags_spec&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">tags_spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;have a tags_spec&quot;</span><span class="p">)</span>
+                <span class="n">method</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">tags_spec</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">filter_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s2">&quot;filter_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">filter_type</span> <span class="o">==</span> <span class="s2">&quot;arn&quot;</span><span class="p">:</span>
+                    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">param_name</span><span class="p">:</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)]}</span>
+                <span class="k">elif</span> <span class="n">filter_type</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+                    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">param_name</span><span class="p">:</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)]}</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">param_name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)}</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">tags_spec</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">tags_spec</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;fetching tags&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="s2">&quot;Tags&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_tags</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;Tags&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tags</span>
+
+<div class="viewcode-block" id="AWSResource.find_metric"><a class="viewcode-back" href="../../../api.html#skew.resources.aws.AWSResource.find_metric">[docs]</a>    <span class="k">def</span> <span class="nf">find_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return specified metric if exists.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;MetricName&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">metric_name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">m</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_total_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+        <span class="c1"># python2.6 does not have timedelta.total_seconds() so we have</span>
+        <span class="c1"># to calculate this ourselves.  This is straight from the</span>
+        <span class="c1"># datetime docs.</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="n">delta</span><span class="o">.</span><span class="n">days</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span>
+
+<div class="viewcode-block" id="AWSResource.get_metric_data"><a class="viewcode-back" href="../../../api.html#skew.resources.aws.AWSResource.get_metric_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_metric_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">metric_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">metric</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">days</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">minutes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">statistics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get metric data for this resource.</span>
+
+<span class="sd">        You can specify the time frame for the data as either the number</span>
+<span class="sd">        of days or number of hours.</span>
+<span class="sd">        The maximum window is 14 days.  Based on the time frame</span>
+<span class="sd">        this method will calculate the correct ``period`` to return</span>
+<span class="sd">        the maximum number of data points up to the CloudWatch max</span>
+<span class="sd">        of 1440.</span>
+
+<span class="sd">        :type metric_name: str</span>
+<span class="sd">        :param metric_name: The name of the metric this data will</span>
+<span class="sd">            pertain to.</span>
+
+<span class="sd">        :type days: int</span>
+<span class="sd">        :param days: The number of days worth of data to return.</span>
+<span class="sd">            You can specify either ``days`` or ``hours``.  The default</span>
+<span class="sd">            is one hour.  The maximum value is 14 days.</span>
+
+<span class="sd">        :type hours: int</span>
+<span class="sd">        :param hours: The number of hours worth of data to return.</span>
+<span class="sd">            You can specify either ``days`` or ``hours``.  The default</span>
+<span class="sd">            is one hour.  The maximum value is 14 days.</span>
+
+<span class="sd">        :type statistics: list of str</span>
+<span class="sd">        :param statistics: The metric statistics to return.  The default</span>
+<span class="sd">            value is **Average**.  Possible values are:</span>
+
+<span class="sd">            * Average</span>
+<span class="sd">            * Sum</span>
+<span class="sd">            * SampleCount</span>
+<span class="sd">            * Maximum</span>
+<span class="sd">            * Minimum</span>
+
+<span class="sd">        :returns: A ``MetricData`` object that contains both the CloudWatch</span>
+<span class="sd">            data as well as the ``period`` used since this value may have</span>
+<span class="sd">            been calculated by skew.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">statistics</span><span class="p">:</span>
+            <span class="n">statistics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Average&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">days</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">hours</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">hours</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">minutes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">period</span><span class="p">:</span>
+            <span class="n">period</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_seconds</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">//</span> <span class="mi">1440</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">metric</span><span class="p">:</span>
+            <span class="n">metric</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">metric</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cloudwatch</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">delta</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cloudwatch</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                <span class="s2">&quot;get_metric_statistics&quot;</span><span class="p">,</span>
+                <span class="n">Dimensions</span><span class="o">=</span><span class="n">metric</span><span class="p">[</span><span class="s2">&quot;Dimensions&quot;</span><span class="p">],</span>
+                <span class="n">Namespace</span><span class="o">=</span><span class="n">metric</span><span class="p">[</span><span class="s2">&quot;Namespace&quot;</span><span class="p">],</span>
+                <span class="n">MetricName</span><span class="o">=</span><span class="n">metric</span><span class="p">[</span><span class="s2">&quot;MetricName&quot;</span><span class="p">],</span>
+                <span class="n">StartTime</span><span class="o">=</span><span class="n">start</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                <span class="n">EndTime</span><span class="o">=</span><span class="n">end</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                <span class="n">Statistics</span><span class="o">=</span><span class="n">statistics</span><span class="p">,</span>
+                <span class="n">Period</span><span class="o">=</span><span class="n">period</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">MetricData</span><span class="p">(</span><span class="n">jmespath</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Datapoints&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="n">period</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Metric (</span><span class="si">%s</span><span class="s2">) not available&quot;</span> <span class="o">%</span> <span class="n">metric_name</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_normalize_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert the ugly Tags JSON into a real dictionary.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">kvpair</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+                <span class="c1"># Compatibility fix for ECS, that use lowercase &#39;key&#39; and &#39;value&#39; as dict keys</span>
+                <span class="c1"># https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ecs.html#ECS.Client.list_tags_for_resource</span>
+                <span class="n">tags_key</span> <span class="o">=</span> <span class="n">kvpair</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Key&quot;</span><span class="p">,</span> <span class="n">kvpair</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">))</span>
+                <span class="n">tags_value</span> <span class="o">=</span> <span class="n">kvpair</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="n">kvpair</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">tags_key</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">tags_key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                        <span class="n">result</span><span class="p">[</span><span class="n">tags_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tags</span><span class="p">[</span><span class="n">tags_key</span><span class="p">]]</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">tags_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tags_value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">tags_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tags_value</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tags</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">tags</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">_feed_from_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_spec</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Utilty to call boto3 on demand.</span>
+
+<span class="sd">        Remove ResponseMetadata if needed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">method</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param_value</span> <span class="o">=</span> <span class="n">attr_spec</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">param_name</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_value</span><span class="p">)}</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;ResponseMetadata&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<span class="n">ArnComponents</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;ArnComponents&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scheme&quot;</span><span class="p">,</span> <span class="s2">&quot;provider&quot;</span><span class="p">,</span> <span class="s2">&quot;service&quot;</span><span class="p">,</span> <span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="s2">&quot;account&quot;</span><span class="p">,</span> <span class="s2">&quot;resource&quot;</span><span class="p">])</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jerome Guibert
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

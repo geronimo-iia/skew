@@ -34,6 +34,7 @@ class MetricData(object):
     was used when getting the data from CloudWatch.  Since the period
     may be calculated by ``get_metrics_data`` rather than passed explicitly
     the user would otherwise not how what the period value was.
+
     """
 
     def __init__(self, data, period):
@@ -42,7 +43,7 @@ class MetricData(object):
 
 
 class AWSResource(Resource):
-    """AWSResource definition.
+    """Base class for all AWS resource definition.
 
     Each Resource class defines a Config variable at the class level.  This
     is a dictionary that gives the specifics about which service the resource
@@ -87,7 +88,6 @@ class AWSResource(Resource):
       given type.  But you can also tell it to filter the results by
       passing in a list of id's.  This parameter tells it the name of the
       parameter to use to specify this list of id's.
-
 
     """
 

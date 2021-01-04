@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>skew.resources.definition &mdash; skew 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> skew
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/geronimo-iia/skew">Github</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">skew</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../skew.html">skew</a> &raquo;</li>
+        
+      <li>skew.resources.definition</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for skew.resources.definition</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2014 Scopely, Inc.</span>
+<span class="c1"># Copyright (c) 2015 Mitch Garnaat</span>
+<span class="c1"># Copyright (c) 2020 Jerome Guibert</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You</span>
+<span class="c1"># may not use this file except in compliance with the License. A copy of</span>
+<span class="c1"># the License is located at</span>
+<span class="c1">#</span>
+<span class="c1"># http://aws.amazon.com/apache2.0/</span>
+<span class="c1">#</span>
+<span class="c1"># or in the &quot;license&quot; file accompanying this file. This file is</span>
+<span class="c1"># distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF</span>
+<span class="c1"># ANY KIND, either express or implied. See the License for the specific</span>
+<span class="c1"># language governing permissions and limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;all_providers&quot;</span><span class="p">,</span> <span class="s2">&quot;all_services&quot;</span><span class="p">,</span> <span class="s2">&quot;all_types&quot;</span><span class="p">,</span> <span class="s2">&quot;find_resource_class&quot;</span><span class="p">]</span>
+
+
+<span class="c1"># Maps resources names as they appear in ARN&#39;s to the path name</span>
+<span class="c1"># of the Python class representing that resource.</span>
+<span class="n">_RESOURCE_TYPES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;aws.acm.certificate&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.acm.Certificate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.apigateway.restapis&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.apigateway.RestAPI&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.autoscaling.autoScalingGroup&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.autoscaling.AutoScalingGroup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.autoscaling.launchConfigurationName&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.autoscaling.LaunchConfiguration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.cloudfront.distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudfront.Distribution&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.cloudformation.stack&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudformation.Stack&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.cloudsearch.domain&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudsearch.Domain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.cloudwatch.alarm&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudwatch.Alarm&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.logs.log-group&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudwatch.LogGroup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.cloudtrail.trail&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudtrail.CloudTrail&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.dynamodb.table&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.dynamodb.Table&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.address&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Address&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.customer-gateway&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.CustomerGateway&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.key-pair&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.KeyPair&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.image&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Image&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.instance&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Instance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.natgateway&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.NatGateway&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.network-acl&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.NetworkAcl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.route-table&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.RouteTable&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.internet-gateway&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.InternetGateway&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.security-group&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.SecurityGroup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.snapshot&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Snapshot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.volume&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Volume&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.vpc&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Vpc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.flow-log&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.FlowLog&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.vpc-peering-connection&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.VpcPeeringConnection&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.subnet&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.Subnet&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ec2.launch-template&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ec2.LaunchTemplate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ecs.cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ecs.Cluster&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ecs.task-definition&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ecs.TaskDefinition&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ecr.registery&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ecr.Registery&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ecr.repository&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ecr.Repository&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.efs.filesystem&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.efs.Filesystem&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elasticache.cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elasticache.Cluster&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elasticache.subnet-group&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elasticache.SubnetGroup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elasticache.snapshot&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elasticache.Snapshot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elasticbeanstalk.application&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elasticbeanstalk.Application&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elasticbeanstalk.environment&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elasticbeanstalk.Environment&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elb.loadbalancer&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elb.LoadBalancer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elbv2.loadbalancer&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elbv2.LoadBalancer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.elbv2.targetgroup&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.elbv2.TargetGroup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.es.domain&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.es.ElasticsearchDomain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.events.rule&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.cloudwatch.CloudWatchEventRule&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.firehose.deliverystream&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.firehose.DeliveryStream&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.iam.group&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.iam.Group&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.iam.instance-profile&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.iam.InstanceProfile&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.iam.role&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.iam.Role&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.iam.policy&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.iam.Policy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.iam.user&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.iam.User&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.iam.server-certificate&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.iam.ServerCertificate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.kinesis.stream&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.kinesis.Stream&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.kms.key&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.kms.Key&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.lambda.function&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.lambda.Function&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.opsworks.stack&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.opsworks.Stack&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.rds.db&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.rds.DBInstance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.rds.secgrp&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.rds.DBSecurityGroup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.redshift.cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.redshift.Cluster&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.route53.hostedzone&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.route53.HostedZone&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.route53.healthcheck&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.route53.HealthCheck&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.s3.bucket&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.s3.Bucket&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.states.statemachine&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.states.StateMachines&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.sqs.queue&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.sqs.Queue&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.ses.identity&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.ses.Identity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.sns.subscription&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.sns.Subscription&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.sns.topic&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.sns.Topic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;aws.support.check&quot;</span><span class="p">:</span> <span class="s2">&quot;aws.support.Check&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="all_providers"><a class="viewcode-back" href="../../../api.html#skew.resources.all_providers">[docs]</a><span class="k">def</span> <span class="nf">all_providers</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return all providers defined in resource types.&quot;&quot;&quot;</span>
+    <span class="n">providers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">resource_type</span> <span class="ow">in</span> <span class="n">_RESOURCE_TYPES</span><span class="p">:</span>
+        <span class="n">providers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">resource_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">providers</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="all_services"><a class="viewcode-back" href="../../../api.html#skew.resources.all_services">[docs]</a><span class="k">def</span> <span class="nf">all_services</span><span class="p">(</span><span class="n">provider_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return all services defined in resource types.&quot;&quot;&quot;</span>
+    <span class="n">services</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">resource_type</span> <span class="ow">in</span> <span class="n">_RESOURCE_TYPES</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">resource_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">provider_name</span><span class="p">:</span>
+            <span class="n">services</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">services</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="all_types"><a class="viewcode-back" href="../../../api.html#skew.resources.all_types">[docs]</a><span class="k">def</span> <span class="nf">all_types</span><span class="p">(</span><span class="n">provider_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">service_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Return all types defined in resource types.&quot;&quot;&quot;</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">resource_type</span> <span class="ow">in</span> <span class="n">_RESOURCE_TYPES</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">resource_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">provider_name</span> <span class="ow">and</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">service_name</span><span class="p">:</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">types</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="find_resource_class"><a class="viewcode-back" href="../../../api.html#skew.resources.find_resource_class">[docs]</a><span class="k">def</span> <span class="nf">find_resource_class</span><span class="p">(</span><span class="n">resource_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dynamically load a class from a string.&quot;&quot;&quot;</span>
+    <span class="n">class_path</span> <span class="o">=</span> <span class="n">_RESOURCE_TYPES</span><span class="p">[</span><span class="n">resource_path</span><span class="p">]</span>
+    <span class="n">class_data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;skew.resources.</span><span class="si">{</span><span class="n">class_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="n">module_path</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">class_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">class_str</span> <span class="o">=</span> <span class="n">class_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_path</span><span class="p">)</span>
+    <span class="c1"># Finally, we retrieve the Class</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_str</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jerome Guibert
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
