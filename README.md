@@ -1,5 +1,8 @@
 # skew
 
+> **⚠️ This repository is archived and no longer maintained.**
+> No further development, bug fixes, or security updates will be provided.
+
 ![PyPI](https://img.shields.io/pypi/v/skew) https://pypi.org/project/skew/
 
 `Skew` is a package for identifying and enumerating cloud resources.
